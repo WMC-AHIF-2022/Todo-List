@@ -1,0 +1,73 @@
+body {
+    background-image: url("../../../img/Background.jpg");
+    background-size: 100%;
+
+    position: fixed;
+}
+
+.grid-container {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 20vw 200px;
+    grid-template-rows: 40px;
+
+    padding: 15px;
+
+    font-family: Arial, Helvetica, serif;
+    letter-spacing: 0.2px;
+}
+
+/* ---------- NAVBAR ---------- */
+
+.navbar {
+    height: calc(100vh - 115%);
+
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+}
+
+.navbar p {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+.navbar div {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.navbar #title {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-weight: bold;
+    font-size: 30px;
+
+    border-bottom: 1.5px solid black;
+}
+
+.navbar .currentElement {
+    height: 40px;
+    font-size: 20px;
+    margin-bottom: 20px;
+    width: 16vw; /* TODO länge korrigieren */
+
+    border-radius: 5px;
+    background: rgb(163, 207, 255);
+
+    border: none;
+}
+
+.navbar .currentElement {
+    cursor: pointer;
+}
+
+.navbar #createNewElement {
+    margin-left: 40px;
+    margin-right: 40px;
+    /* TODO element ans ende */
+
+    font-size: 15px;
+    color: rgb(20, 29, 39);
+
+    border: none;
+    background: none;
+}
