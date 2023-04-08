@@ -7,35 +7,20 @@ body {
 
 .grid-container {
     display: grid;
-    gap: 20px;
-    grid-template-columns: 20vw 200px;
+    gap: 1.5vw;
+    grid-template-columns: 20vw 20vw;
     grid-template-rows: 40px;
 
-    padding: 15px;
+    padding: 1vw;
 
     font-family: Arial, Helvetica, serif;
     letter-spacing: 0.2px;
 }
 
-/* ---------- NAVBAR ---------- */
 
-.navbar {
-    height: calc(100vh - 115%);
+/* ---------- GENERAL ---------- */
 
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 5px;
-}
-
-.navbar p {
-    margin-left: 40px;
-    margin-right: 40px;
-}
-.navbar div {
-    margin-left: 40px;
-    margin-right: 40px;
-}
-
-.navbar #title {
+.title {
     margin-top: 40px;
     margin-bottom: 40px;
     font-weight: bold;
@@ -44,30 +29,30 @@ body {
     border-bottom: 1.5px solid black;
 }
 
-.navbar .currentElement {
+p {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+button {
+    margin-left: 40px;
+    text-align: left;
+}
+
+.currentElement {
     height: 40px;
     font-size: 20px;
     margin-bottom: 20px;
+    padding-left: 15px;
     width: 16vw; /* TODO länge korrigieren */
 
     border-radius: 5px;
     background: rgb(163, 207, 255);
 
     border: none;
-}
 
-.navbar .currentElement {
     cursor: pointer;
 }
-
-.navbar #createNewElement {
-    margin-left: 40px;
-    margin-right: 40px;
-    /* TODO element ans ende */
-
-    font-size: 15px;
-    color: rgb(20, 29, 39);
-
-    border: none;
-    background: none;
+.currentElement:hover {
+    background: rgb(155, 195, 248);
 }

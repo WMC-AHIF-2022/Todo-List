@@ -1,0 +1,20 @@
+.lists {
+    height: 100vh;
+
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+}
+
+.createNewList {
+    margin-left: 40px;
+    margin-right: 40px;
+    /* TODO element ans ende */
+
+    font-size: 15px;
+    color: rgb(20, 29, 39);
+
+    border: none;
+    background: none;
+
+    cursor: pointer;
+}
