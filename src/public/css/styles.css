@@ -1,14 +1,13 @@
 body {
     background-image: url("../../../img/Background.jpg");
     background-size: 100%;
-
     position: fixed;
 }
 
 .grid-container {
     display: grid;
     gap: 1.5vw;
-    grid-template-columns: 20vw 20vw;
+    grid-template-columns: 20vw 20vw 20vw;
     grid-template-rows: 40px;
 
     padding: 1vw;

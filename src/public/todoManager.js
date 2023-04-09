@@ -19,7 +19,7 @@ function displayItems() {
                             <i class="fa fa-pencil editBtn"></i>
                         </div>
                     </div>
-                    <div class="update-controller">
+                    <div class="update-controller" style="display: none">
                         <button class="saveBtn">Save</button>
                         <button class="cancelBtn">Cancel</button>
                     </div>
@@ -72,6 +72,7 @@ function activateCancelListener() {
         cb.addEventListener('click', () => {
             updateController[i].style.display = "none";
             inputs[i].disabled = true;
+            location.reload();
         })
 
     })
