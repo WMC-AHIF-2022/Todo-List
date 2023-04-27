@@ -1,19 +1,22 @@
 body {
-    background-image: url("../../../img/Background.jpg");
+    background-image: url("../img/Background.jpg");
     background-size: 100%;
+
     position: fixed;
 }
 
 .grid-container {
     display: grid;
     gap: 1.5vw;
-    grid-template-columns: 20vw 20vw 20vw;
+    grid-template-columns: 20vw 20vw;
     grid-template-rows: 40px;
 
     padding: 1vw;
 
     font-family: Arial, Helvetica, serif;
     letter-spacing: 0.2px;
+
+    height: calc(100vh - 50px);
 }
 
 
