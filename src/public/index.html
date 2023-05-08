@@ -12,44 +12,50 @@
 </head>
 <body>
 <div class="grid-container">
-        <!-- ---------- NAVBAR ---------- -->
-        <div class="lists">
-            <p class="title">My Lists</p>
-            <div id="usersLists">
+    <!-- ---------- NAVBAR ---------- -->
+    <div class="lists">
+        <p class="title">My Lists</p>
 
-            </div>
+        <div class="lists-list"></div>
 
-            <button class="createNewList" onclick="">+ create new list</button>
+        <div class="listInput">
+            <p>Name:</p>
+            <label for="newList"></label><input
+                type="text"
+                id="newList"
+                placeholder="Enter new list">
+            <button id="enterList"></button>
         </div>
-
-        <!-- ---------- SEARCH BOX ---------- -->
-        <div class="searchBox">
-            Searchbox
-        </div>
-        <div></div>
-
-        <!-- ---------- CURRENT LIST ---------- -->
-        <div class="currentList">
-            <p class="title">List name</p>
-            <div id="usersTodos">
-
-            </div>
-
-            <div class="todo-list"></div>
-
-            <div class="todoInput">
-                <p>Name:</p>
-                <label for="item"></label><input
-                    type="text"
-                    id="item"
-                    placeholder="Enter new todo">
-                <button id="enter"></button>
-            </div>
-            <button class="createNewTodo" onclick="showHideTodoInputField()">+ create new Todo</button>
-        </div>
+        <button class="createNewList" onclick="showAndHideListInputField()">+ create new List</button>
     </div>
 
-    <script src="todoManager.js"></script>
-    <script src="showHideTodoInputField.js"></script>
+    <!-- ---------- SEARCH BOX ---------- -->
+    <div class="searchBox">
+        Searchbox
+    </div>
+    <div></div>
+
+    <!-- ---------- CURRENT LIST ---------- -->
+    <div class="currentList">
+        <p class="title">List name</p>
+
+        <div class="todos"></div>
+
+        <div class="todoInput">
+            <p>Name:</p>
+            <label for="newTodo"></label><input
+                type="text"
+                id="newTodo"
+                placeholder="Enter new todo">
+            <button id="enterTodo"></button>
+        </div>
+        <button class="createNewTodo" onclick="showAndHideTodoInputField()">+ create new Todo</button>
+    </div>
+</div>
+
+<script src="scripts/todoManager.js"></script>
+<script src="scripts/listManagement.js"></script>
+<script src="scripts/showAndHideInputFields/showAndHideTodoInputField.js"></script>
+<script src="scripts/showAndHideInputFields/showAndHideListInputField.js"></script>
 </body>
 </html>

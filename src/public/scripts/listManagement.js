@@ -1,38 +1,38 @@
-let currentlyEditingTodoID;
-let htmlInputItem;
-// when input is entered a new task is created
-document.querySelector("#enter").addEventListener('click', () => {
-    htmlInputItem = document.querySelector("#item");
-    createTodo(htmlInputItem);
+let currentlyEditingListID;
+let htmlListInputItem;
+
+document.querySelector("#enterList").addEventListener('click', () => {
+    htmlListInputItem = document.querySelector("#newList");
+    createList(htmlListInputItem);
 })
 
-function displayItems(todos) {
+function displayLists(lists) {
     // add new task to html
     let items = "";
-    for (let i = 0; i < todos.length; i++) {
+    for (let i = 0; i < lists.length; i++) {
         items += `<div class="item">
-                    <div class="input-controller">
+                    <div class="input-controller-lists" style="transform: translateZ(0);">
                         <label>
-                            <textarea onkeydown="keyDown(event, this.value, this)" disabled>${todos[i].NAME}</textarea>
+                            <textarea onkeydown="keyDown(event, this.value, this)" disabled>${lists[i].NAME}</textarea>
                         </label>
                         <div class="edit-controller">
-                            <i class="fa sharp fa-light fa-check deleteBtn" onclick="deleteTodo(${todos[i].ID})"></i>
+                            <i class="fa sharp fa-light fa-check deleteBtn" onclick="deleteList(${lists[i].ID})"></i>
                             <i class="fa fa-pencil editBtn"></i>
                         </div>
                     </div>
-                     <div data-dbID="${todos[i].ID}" class="update-controller" style="display: none">
+                     <div data-dbID="${lists[i].ID}" class="update-controller" style="display: none">
                            
                     </div>
                 </div>`
     }
-    document.querySelector(".todo-list").innerHTML = items;
+    document.querySelector(".lists-list").innerHTML = items;
 
     activateEditListener();
 }
 
 function keyDown(e, name, textarea) {
     if (e.keyCode === 13) { // enter
-        updateTodo(name);
+        updateList(name);
         e.preventDefault();
     }
     if (e.keyCode === 27) { // esc
@@ -40,20 +40,19 @@ function keyDown(e, name, textarea) {
     }
 }
 
-// get todos after return is ready
-function refreshTodos() {
-    getTodos().then(result => {
-        displayItems(result);
+function refreshLists() {
+    getLists().then(result => {
+        displayLists(result);
     })
 }
 
-async function getTodos() {
-    let res = await fetch ("/api/getTodos");
+async function getLists() {
+    let res = await fetch ("/api/getLists");
     return await res.json();
 }
 
-async function createTodo(data) {
-    await fetch("/api/createTodo", {
+async function createList(data) {
+    await fetch("/api/createList", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -63,29 +62,29 @@ async function createTodo(data) {
         }),
     })
 
-    this.item.value = "";
-    hideTodoInput(); // showHideTodoInputField.js
-
-    refreshTodos();
+    this.value = "";
+    hideListInput(); // showAndHideListInputField.js
+    refreshLists();
 }
-async function updateTodo(name) { 
-    await fetch("/api/editTodo", {
+
+async function updateList(name) {
+    await fetch("/api/editList", {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
             value: name,
-            index: currentlyEditingTodoID
+            index: currentlyEditingListID
         }),
     }).catch((err) => {
         console.log(err.message);
     })
-    refreshTodos();
+    refreshLists();
 }
 
-async function deleteTodo(id) {
-    await fetch("/api/deleteTodo", {
+async function deleteList(id) {
+    await fetch("/api/deleteList", {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
@@ -94,7 +93,7 @@ async function deleteTodo(id) {
             "index": id
         }),
     })
-    refreshTodos();
+    refreshLists();
 }
 
 
@@ -103,18 +102,18 @@ async function deleteTodo(id) {
 function activateEditListener() {
     const editBtn = document.querySelectorAll(".editBtn");
     const updateController = document.querySelectorAll(".update-controller");
-    const inputs = document.querySelectorAll(".input-controller textarea");
+    const inputs = document.querySelectorAll(".input-controller-lists textarea");
 
     editBtn.forEach((eb, i) => {
         eb.addEventListener('click', () => {
             updateController[i].style.display = "block";
             inputs[i].disabled = false;
             inputs[i].focus();
-            currentlyEditingTodoID = updateController[i].dataset.dbid;
+            currentlyEditingListID = updateController[i].dataset.dbid;
         })
     })
 }
 
 window.addEventListener('load', () => {
-    refreshTodos();
+    refreshLists();
 })

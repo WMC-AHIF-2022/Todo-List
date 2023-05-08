@@ -1,6 +1,6 @@
 isClicked = false;
 
-function showHideTodoInputField() {
+function showAndHideTodoInputField() {
     if (isClicked) {
         hideTodoInput();
     } else {

@@ -7,9 +7,9 @@
 .createNewTodo {
     position: absolute;
     bottom: 30px;
+
     margin-left: 40px;
     margin-right: 40px;
-    /* TODO element ans ende */
 
     font-size: 15px;
     color: rgb(20, 29, 39);
@@ -65,7 +65,7 @@
 
 /* ---------- TODOS ---------- */
 
-.todo-list {
+.todos {
     margin-left: 40px;
     margin-right: 30px;
 }
@@ -96,7 +96,6 @@
     position: relative;
 }
 
-/* TODO Buttons fliegen */
 .deleteBtn {
     position: absolute;
     right: 10px;

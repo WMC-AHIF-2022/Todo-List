@@ -6,9 +6,11 @@
 }
 
 .createNewList {
+    position: absolute;
+    bottom: 30px;
+
     margin-left: 40px;
     margin-right: 40px;
-    /* TODO element ans ende */
 
     font-size: 15px;
     color: rgb(20, 29, 39);
@@ -17,4 +19,68 @@
     background: none;
 
     cursor: pointer;
+}
+
+
+/* ---------- LIST INPUT ---------- */
+
+.listInput {
+    position: absolute;
+
+    width: calc(20vw - 70px);
+    bottom: 45px;
+    flex-direction: row;
+
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 10px;
+
+    border-radius: 5px;
+
+    height: 5.5vh;
+    background-color: rgb(255, 255, 255, 0.5);
+
+    display: none;
+}
+.listInput input {
+    margin-top: 10px;
+
+    width: 55%;
+
+    border: 1.5px solid rgb(155, 195, 248);
+    border-radius: 5px;
+
+    padding: 5px;
+    height: 15px;
+}
+.listInput p {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.listInput button {
+    height: 20px;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+
+/* ---------- LISTS ---------- */
+
+.input-controller-lists textarea {
+    border: none;
+    background: rgb(163, 207, 255);
+    border-radius: 2px;
+    width: calc(100% - 45px);
+
+    margin-bottom: 5px;
+
+    padding-left: 10px;
+    padding-top: 10px;
+
+    resize: none;
+}
+
+.input-controller-lists {
+    margin-left: 40px;
+    margin-right: 30px;
 }

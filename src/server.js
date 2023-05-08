@@ -19,6 +19,7 @@ app.listen(port, () => {
     console.log("Server listening on port " + port);
 })
 
+// ---------- TODOS ----------
 app.get("/api/getTodos", (req, res) => {
     db.query("SELECT * FROM TODOS", (err, rows) => {
         if (err) {
@@ -55,6 +56,51 @@ app.put("/api/editTodo", (req, res) => {
 
 app.delete("/api/deleteTodo", (req, res) => {
     db.query(`DELETE FROM TODOS WHERE ID = ${req.body.index}`, (err, rows) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.send(rows);
+    })
+})
+
+// ---------- LISTS ----------
+app.get("/api/getLists", (req, res) => {
+    db.query("SELECT * FROM LISTS", (err, rows) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.send(rows);
+    })
+})
+
+app.post("/api/createList", (req, res) => {
+    db.query(`INSERT INTO LISTS (name) VALUES ('${req.body.value}')`, (err, rows) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.send(rows);
+    })
+})
+
+app.put("/api/editList", (req, res) => {
+    if (req.body.value.length > 40) {
+        res.status(400).json({ message: "input too long"});
+        return;
+    }
+    db.query(`UPDATE LISTS SET NAME = '${req.body.value}' WHERE ID = ${req.body.index}`, (err, rows) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.send(rows);
+    })
+})
+
+app.delete("/api/deleteList", (req, res) => {
+    db.query(`DELETE FROM LISTS WHERE ID = ${req.body.index}`, (err, rows) => {
         if (err) {
             console.log(err);
             return;
