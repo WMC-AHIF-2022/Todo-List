@@ -40,6 +40,10 @@ app.post("/api/createTodo", (req, res) => {
 })
 
 app.put("/api/editTodo", (req, res) => {
+    if (req.body.value.length > 40) {
+        res.status(400).json({ message: "input too long"});
+        return;
+    }
     db.query(`UPDATE TODOS SET NAME = '${req.body.value}' WHERE ID = ${req.body.index}`, (err, rows) => {
         if (err) {
             console.log(err);

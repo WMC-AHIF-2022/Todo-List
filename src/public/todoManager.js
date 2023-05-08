@@ -13,7 +13,7 @@ function displayItems(todos) {
         items += `<div class="item">
                     <div class="input-controller">
                         <label>
-                            <textarea disabled>${todos[i].NAME}</textarea>
+                            <textarea onkeydown="keyDown(event, this.value, this)" disabled>${todos[i].NAME}</textarea>
                         </label>
                         <div class="edit-controller">
                             <i class="fa sharp fa-light fa-check deleteBtn" onclick="deleteTodo(${todos[i].ID})"></i>
@@ -21,16 +21,23 @@ function displayItems(todos) {
                         </div>
                     </div>
                      <div data-dbID="${todos[i].ID}" class="update-controller" style="display: none">
-                        <button class="saveBtn">Save</button>
-                        <button class="cancelBtn">Cancel</button>
+                           
                     </div>
                 </div>`
     }
     document.querySelector(".todo-list").innerHTML = items;
 
     activateEditListener();
-    activateSaveListener();
-    activateCancelListener();
+}
+
+function keyDown(e, name, textarea) {
+    if (e.keyCode === 13) { // enter
+        updateTodo(name);
+        e.preventDefault();
+    }
+    if (e.keyCode === 27) { // esc
+        textarea.disabled = false;
+    }
 }
 
 // get todos after return is ready
@@ -61,7 +68,7 @@ async function createTodo(data) {
 
     refreshTodos();
 }
-async function updateTodo(name) { // TODO funktioniert noch nicht
+async function updateTodo(name) { 
     await fetch("/api/editTodo", {
         method: "PUT",
         headers: {
@@ -71,6 +78,8 @@ async function updateTodo(name) { // TODO funktioniert noch nicht
             value: name,
             index: currentlyEditingTodoID
         }),
+    }).catch((err) => {
+        console.log(err.message);
     })
     refreshTodos();
 }
@@ -100,32 +109,8 @@ function activateEditListener() {
         eb.addEventListener('click', () => {
             updateController[i].style.display = "block";
             inputs[i].disabled = false;
-            currentlyEditingTodoID = updateController[i].dataset.dbID;
-        })
-    })
-}
-function activateSaveListener() {
-    const saveBtn = document.querySelectorAll(".saveBtn");
-    const inputs = document.querySelectorAll(".input-controller textarea");
-    const updateController = document.querySelectorAll(".update-controller");
-
-    saveBtn.forEach((sb, i) => {
-        sb.addEventListener('click', () => {
-            updateTodo(inputs[i].value, i);
-            updateController[i].style.display = "none";
-        })
-    })
-}
-
-function activateCancelListener() {
-    const cancelBtn = document.querySelectorAll(".cancelBtn");
-    const updateController = document.querySelectorAll(".update-controller");
-    const inputs = document.querySelectorAll(".input-controller textarea");
-
-    cancelBtn.forEach((cb, i) => {
-        cb.addEventListener('click', () => {
-            updateController[i].style.display = "none";
-            inputs[i].disabled = true;
+            inputs[i].focus();
+            currentlyEditingTodoID = updateController[i].dataset.dbid;
         })
     })
 }

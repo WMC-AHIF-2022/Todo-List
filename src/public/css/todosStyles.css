@@ -5,6 +5,8 @@
 
 
 .createNewTodo {
+    position: absolute;
+    bottom: 30px;
     margin-left: 40px;
     margin-right: 40px;
     /* TODO element ans ende */
@@ -22,6 +24,10 @@
 /* ---------- INPUT FIELD ---------- */
 
 .todoInput {
+    position: absolute;
+
+    width: calc(20vw - 70px);
+    bottom: 45px;
     flex-direction: row;
 
     margin-left: 40px;
@@ -37,6 +43,8 @@
 }
 .todoInput input {
     margin-top: 10px;
+
+    width: 55%;
 
     border: 1.5px solid rgb(155, 195, 248);
     border-radius: 5px;
@@ -62,11 +70,17 @@
     margin-right: 30px;
 }
 
+.input-controller {
+    transform: translateZ(0);
+}
+
 .input-controller textarea {
     border: none;
     background: rgb(163, 207, 255);
     border-radius: 2px;
-    width: calc(15vw - 5px);
+    width: calc(100% - 45px);
+
+    margin-bottom: 5px;
 
     padding-left: 10px;
     padding-top: 10px;
@@ -74,15 +88,6 @@
     resize: none;
 }
 /* ---------- EDIT TODOS ---------- */
-
-.update-controller {
-    border: none;
-    background-color: rgb(255,255,255, 0.5);
-    border-radius: 2px;
-    height: 40px;
-
-    width: 15vw;
-}
 
 .update-controller button {
     height: 20px;
@@ -94,12 +99,12 @@
 /* TODO Buttons fliegen */
 .deleteBtn {
     position: absolute;
-    right: 0;
+    right: 10px;
     top: 5px;
 }
 
 .editBtn {
     position: absolute;
-    right: 0;
+    right: 10px;
     top: 20px;
 }
