@@ -1,55 +1,68 @@
 let currentlyEditingTodoID;
-let htmlInputItem;
+let htmlInputItem_todos;
+let currentListID;
+
+let todos; // from db
+
 // when input is entered a new task is created
-document.querySelector("#enterTodo").addEventListener('click', () => {
-    htmlInputItem = document.querySelector("#newTodo");
-    createTodo(htmlInputItem);
-})
-
-function displayItems(todos) {
-    // add new task to html
-    let items = "";
-    for (let i = 0; i < todos.length; i++) {
-        items += `<div class="item">
-                    <div class="input-controller">
-                        <label>
-                            <textarea onkeydown="keyDown(event, this.value, this)" disabled>${todos[i].NAME}</textarea>
-                        </label>
-                        <div class="edit-controller">
-                            <i class="fa sharp fa-light fa-check deleteBtn" onclick="deleteTodo(${todos[i].ID})"></i>
-                            <i class="fa fa-pencil editBtn"></i>
-                        </div>
-                    </div>
-                     <div data-dbID="${todos[i].ID}" class="update-controller" style="display: none">
-                           
-                    </div>
-                </div>`
+function createTodoButtonPressed() {
+    htmlInputItem_todos = document.querySelector("#newTodo");
+    // when input is not null
+    if (htmlInputItem_todos.value) {
+        createTodo(htmlInputItem_todos);
     }
-    document.querySelector(".todos").innerHTML = items;
-
-    activateEditListener();
 }
 
-function keyDown(e, name, textarea) {
+function displayTodos() {
+    // add new item to html
+    let displayedTodos = "";
+    for (let i = 0; i < todos.length; i++) {
+        displayedTodos += `<div class="item">
+                    <div class="input-controller_todos"> <!-- html element where the item is displayed -->
+                        <label>
+                            <textarea onkeydown="onKeyDown_todos(event, this.value, this)" disabled>${todos[i].NAME}</textarea>
+                        </label>
+                        <div class="edit-controller_todos">
+                            <i class="fa fa-duotone fa-check deleteBtn" style="transform: scale(0.9)" onclick="deleteTodo(${todos[i].ID})"></i>
+                            <i class="fa fa-pencil editBtn_todos" style="transform: scale(0.8)" onclick="activateEditListener_todos();"></i>
+                        </div>
+                    </div>
+                    <!-- when pencil was pressed -->
+                    <div data-dbID="${todos[i].ID}" class="update-controller_todos" style="display: none"></div>
+                </div>`
+    }
+    document.querySelector(".todos").innerHTML = displayedTodos;
+}
+
+function onKeyDown_todos(e, name, textarea) {
     if (e.keyCode === 13) { // enter
         updateTodo(name);
         e.preventDefault();
     }
     if (e.keyCode === 27) { // esc
-        textarea.disabled = false;
+        textarea.disabled = true;
+        refreshTodos();
     }
 }
 
 // get todos after return is ready
 function refreshTodos() {
-    getTodos().then(result => {
-        displayItems(result);
+    getTodos(currentListID).then(result => {
+        displayTodos();
     })
 }
 
-async function getTodos() {
-    let res = await fetch ("/api/getTodos");
-    return await res.json();
+async function getTodos(listID) {
+    if (listID) {
+        currentListID = listID;
+
+        let res = await fetch(`/api/getTodos?currentListID=${listID}`);
+        const data = await res.json();
+        todos = data; // set db rows to todos
+
+        displayTodos();
+        return data;
+    }
 }
 
 async function createTodo(data) {
@@ -60,14 +73,15 @@ async function createTodo(data) {
         },
         body: JSON.stringify({
             "value": data.value,
+            "index": currentListID
         }),
     })
 
-    this.value = "";
+    data.value = "";
     hideTodoInput(); // showAndHideTodoInputField.js
-
     refreshTodos();
 }
+
 async function updateTodo(name) {
     await fetch("/api/editTodo", {
         method: "PUT",
@@ -84,6 +98,8 @@ async function updateTodo(name) {
     refreshTodos();
 }
 
+
+// ---------- delete todos ----------
 async function deleteTodo(id) {
     await fetch("/api/deleteTodo", {
         method: "DELETE",
@@ -97,24 +113,34 @@ async function deleteTodo(id) {
     refreshTodos();
 }
 
+async function deleteAllTodosFromList(listId) {
+    await fetch("/api/deleteAllTodosFromList", {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            "index": listId
+        }),
+    })
+    refreshTodos();
+}
 
-// ---------- EVENT LISTENERS ----------
 
-function activateEditListener() {
-    const editBtn = document.querySelectorAll(".editBtn");
-    const updateController = document.querySelectorAll(".update-controller");
-    const inputs = document.querySelectorAll(".input-controller textarea");
+// when edit button was pressed
+function activateEditListener_todos() {
+    const updateController = document.querySelectorAll(".update-controller_todos");
+    const inputs = document.querySelectorAll(".input-controller_todos textarea");
 
+    const editBtn = document.querySelectorAll(".editBtn_todos");
+    // check which edit button was pressed
     editBtn.forEach((eb, i) => {
         eb.addEventListener('click', () => {
             updateController[i].style.display = "block";
             inputs[i].disabled = false;
             inputs[i].focus();
+
             currentlyEditingTodoID = updateController[i].dataset.dbid;
         })
     })
 }
-
-window.addEventListener('load', () => {
-    refreshTodos();
-})

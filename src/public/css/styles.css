@@ -39,6 +39,8 @@ p {
 button {
     margin-left: 40px;
     text-align: left;
+
+    cursor: pointer;
 }
 
 .currentElement {
@@ -46,7 +48,7 @@ button {
     font-size: 20px;
     margin-bottom: 20px;
     padding-left: 15px;
-    width: 16vw; /* TODO länge korrigieren */
+    width: 16vw;
 
     border-radius: 5px;
     background: rgb(163, 207, 255);
@@ -57,4 +59,26 @@ button {
 }
 .currentElement:hover {
     background: rgb(155, 195, 248);
+}
+
+/* ---------- SEARCH BOX ---------- */
+.searchBox {
+    margin-top: 20px;
+}
+
+.searchBox input {
+    background-color: rgb(255, 255, 255, 0.2);
+    border: none;
+    height: 15px;
+    border-radius: 5px;
+    padding: 2px;
+
+    width: 60%;
+
+    transition: all 0.4s ease-in-out;
+}
+.searchBox input:focus {
+    background-color: rgb(255, 255, 255, 0.5);
+    width: calc(100% - 25px);
+    outline: none;
 }

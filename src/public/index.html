@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/todosStyles.css">
     <link rel="stylesheet" href="css/listsStyles.css">
+    <link rel="stylesheet" href="css/search.css">
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet" type='text/css'>
-</head>
+    <script src="https://kit.fontawesome.com/5548ac9694.js" crossorigin="anonymous"></script></head>
 <body>
 <div class="grid-container">
     <!-- ---------- NAVBAR ---------- -->
@@ -24,20 +24,30 @@
                 type="text"
                 id="newList"
                 placeholder="Enter new list">
-            <button id="enterList"></button>
+            <i class="fa fa-duotone fa-check enterListBtn" id="enterList"></i>
         </div>
         <button class="createNewList" onclick="showAndHideListInputField()">+ create new List</button>
     </div>
 
+
     <!-- ---------- SEARCH BOX ---------- -->
     <div class="searchBox">
-        Searchbox
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input id ="searchInput" placeholder="Search" onkeydown="displaySearchedTodos(event)">
+
     </div>
-    <div></div>
+    <div class="searchedItems">
+        <p id="searchedTodosHeading" style="display: none">Todos</p>
+        <div class="searchedTodos"></div>
+
+        <p id="searchedListsHeading" style="display: none">Lists</p>
+        <div class="searchedLists"></div>
+    </div>
+
 
     <!-- ---------- CURRENT LIST ---------- -->
     <div class="currentList">
-        <p class="title">List name</p>
+        <p class="title" id="listTitle"></p>
 
         <div class="todos"></div>
 
@@ -47,7 +57,7 @@
                 type="text"
                 id="newTodo"
                 placeholder="Enter new todo">
-            <button id="enterTodo"></button>
+            <i class="fa fa-duotone fa-check enterTodoBtn" id="enterTodo" onclick="createTodoButtonPressed()"></i>
         </div>
         <button class="createNewTodo" onclick="showAndHideTodoInputField()">+ create new Todo</button>
     </div>
@@ -57,5 +67,8 @@
 <script src="scripts/listManagement.js"></script>
 <script src="scripts/showAndHideInputFields/showAndHideTodoInputField.js"></script>
 <script src="scripts/showAndHideInputFields/showAndHideListInputField.js"></script>
+<script src="scripts/showAndHideTodos/showAndHideTodos.js"></script>
+<script src="scripts/showAndHideSearchBox/showAndHideSearchBox.js"></script>
+<script src="scripts/search.js"></script>
 </body>
 </html>

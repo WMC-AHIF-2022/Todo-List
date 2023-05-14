@@ -1,3 +1,4 @@
+let listInput = document.querySelector(".listInput");
 isClicked = false;
 
 function showAndHideListInputField() {
@@ -9,13 +10,15 @@ function showAndHideListInputField() {
 }
 
 function showListInput() {
-    document.querySelector(".listInput").style.display = "flex";
+    listInput.style.visibility = "visible";
+    listInput.style.opacity = "1";
     document.querySelector(".createNewList").innerHTML = "- create new List";
     this.isClicked = true;
 }
 
 function hideListInput() {
-    document.querySelector(".listInput").style.display = "none";
+    listInput.style.visibility = "hidden";
+    listInput.style.opacity = "0";
     document.querySelector(".createNewList").innerHTML = "+ create new List";
     this.isClicked = false;
 }

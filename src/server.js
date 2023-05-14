@@ -21,7 +21,7 @@ app.listen(port, () => {
 
 // ---------- TODOS ----------
 app.get("/api/getTodos", (req, res) => {
-    db.query("SELECT * FROM TODOS", (err, rows) => {
+    db.query(`SELECT * FROM TODOS WHERE LISTID = ${req.query.currentListID}`, (err, rows) => {
         if (err) {
             console.log(err);
             return;
@@ -31,7 +31,7 @@ app.get("/api/getTodos", (req, res) => {
 })
 
 app.post("/api/createTodo", (req, res) => {
-    db.query(`INSERT INTO TODOS (name, done, listId) VALUES ('${req.body.value}', false, 1)`, (err, rows) => {
+    db.query(`INSERT INTO TODOS (name, done, listId) VALUES ('${req.body.value}', false, ${req.body.index})`, (err, rows) => {
         if (err) {
             console.log(err);
             return;
@@ -41,6 +41,7 @@ app.post("/api/createTodo", (req, res) => {
 })
 
 app.put("/api/editTodo", (req, res) => {
+    console.log(req.body.value);
     if (req.body.value.length > 40) {
         res.status(400).json({ message: "input too long"});
         return;
@@ -56,6 +57,16 @@ app.put("/api/editTodo", (req, res) => {
 
 app.delete("/api/deleteTodo", (req, res) => {
     db.query(`DELETE FROM TODOS WHERE ID = ${req.body.index}`, (err, rows) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.send(rows);
+    })
+})
+
+app.delete("/api/deleteAllTodosFromList", (req, res) => {
+    db.query(`DELETE FROM TODOS WHERE LISTID = ${req.body.index}`, (err, rows) => {
         if (err) {
             console.log(err);
             return;
@@ -107,4 +118,28 @@ app.delete("/api/deleteList", (req, res) => {
         }
         res.send(rows);
     })
+})
+
+
+// ---------- SEARCH ----------
+app.get("/api/search/getTodosWithOccurringLetters", (req, res) => {
+    console.log(req.query.letter)
+    db.query(`SELECT * FROM TODOS WHERE LOWER(NAME) LIKE '%${req.query.letter}%';`, (err, rows) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.send(rows);
+    });
+})
+
+app.get("/api/search/getListsWithOccurringLetters", (req, res) => {
+    console.log(req.query.letter)
+    db.query(`SELECT * FROM LISTS WHERE LOWER(NAME) LIKE '%${req.query.letter}%';`, (err, rows) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.send(rows);
+    });
 })

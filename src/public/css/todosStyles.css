@@ -1,4 +1,10 @@
 .currentList {
+    grid-column: 2;
+
+    display: block;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+
     background: rgba(255, 255, 255, 0.3);
     border-radius: 5px;
 }
@@ -26,7 +32,13 @@
 .todoInput {
     position: absolute;
 
-    width: calc(20vw - 70px);
+    display: flex;
+    visibility: hidden;
+    transition: all 0.5s ease-in-out;
+
+    width: calc(20vw - 80px);
+    height: 38px;
+
     bottom: 45px;
     flex-direction: row;
 
@@ -36,30 +48,36 @@
 
     border-radius: 5px;
 
-    height: 5.5vh;
     background-color: rgb(255,255,255, 0.5);
-
-    display: none;
 }
 .todoInput input {
-    margin-top: 10px;
+    margin-top: 8px;
 
-    width: 55%;
+    background-color: rgb(255, 255, 255, 0.5);
 
-    border: 1.5px solid rgb(155, 195, 248);
+    width: calc(20vw - 200px);
+
+    border: 1.5px solid rgb(255, 255, 255, 0.5);
     border-radius: 5px;
 
     padding: 5px;
-    height: 15px;
+    height: 10px;
 }
+.todoInput input:focus {
+    outline: none;
+    border: 1.5px solid rgb(155, 195, 248);
+ }
 .todoInput p {
     margin-left: 10px;
     margin-right: 10px;
+    margin-top: 11px;
 }
-.todoInput button {
+.enterTodoBtn {
     height: 20px;
-    margin-top: 15px;
+    margin-top: 11px;
     margin-left: 10px;
+    
+    cursor: pointer;
 }
 
 
@@ -70,11 +88,11 @@
     margin-right: 30px;
 }
 
-.input-controller {
+.input-controller_todos {
     transform: translateZ(0);
 }
 
-.input-controller textarea {
+.input-controller_todos textarea {
     border: none;
     background: rgb(163, 207, 255);
     border-radius: 2px;
@@ -100,10 +118,14 @@
     position: absolute;
     right: 10px;
     top: 5px;
+
+    cursor: pointer;
 }
 
-.editBtn {
+.editBtn_todos {
     position: absolute;
     right: 10px;
     top: 20px;
+
+    cursor: pointer;
 }
