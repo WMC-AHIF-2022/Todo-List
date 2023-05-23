@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/todosStyles.css">
     <link rel="stylesheet" href="css/listsStyles.css">
     <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="css/todoDetails.css">
 
     <script src="https://kit.fontawesome.com/5548ac9694.js" crossorigin="anonymous"></script></head>
 <body>
@@ -53,13 +54,26 @@
 
         <div class="todoInput">
             <p>Name:</p>
-            <label for="newTodo"></label><input
-                type="text"
-                id="newTodo"
-                placeholder="Enter new todo">
+            <label for="newTodo"></label>
+            <input type="text" id="newTodo" placeholder="Enter new todo">
+
+            <p style="position: absolute; top: 30px;">Date:</p>
+            <input id="newTodoDate" style="position: absolute; top: 30px; left: 68px;" type="text" placeholder="TT.MM.JJJJ" pattern="\d{2}\.\d{2}\.\d{4}">
             <i class="fa fa-duotone fa-check enterTodoBtn" id="enterTodo" onclick="createTodoButtonPressed()"></i>
         </div>
         <button class="createNewTodo" onclick="showAndHideTodoInputField()">+ create new Todo</button>
+    </div>
+
+
+    <!-- ---------- TODOS DETAILS ---------- -->
+    <div class="todoDetails">
+        <p id="todoDetailsNameHeading">Name: <span id="todoDetailsName">bla bla</span></p>
+        <p id="todoDetailsDateHeading">Date: <span id="todoDetailsDate">05.05.2023</span></p>
+        <p id="todoDetailsDescriptionHeading">
+            Description
+            <i class="fa fa-pencil editTodoDescription" onclick="editTodoDescription()"></i>
+        </p>
+        <textarea id="todoDetailsDescription" disabled onkeydown="onKeyDown_todoDetails(event, this.value, this)"></textarea>
     </div>
 </div>
 
@@ -69,6 +83,8 @@
 <script src="scripts/showAndHideInputFields/showAndHideListInputField.js"></script>
 <script src="scripts/showAndHideTodos/showAndHideTodos.js"></script>
 <script src="scripts/showAndHideSearchBox/showAndHideSearchBox.js"></script>
+<script src="scripts/showAndHideTodoDetails/showAndHideTodoDetails.js"></script>
 <script src="scripts/search.js"></script>
+<script src="scripts/todoDetails.js"></script>
 </body>
 </html>

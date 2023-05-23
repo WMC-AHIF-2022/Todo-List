@@ -1,0 +1,68 @@
+.todoDetails {
+    position: relative;
+    grid-column: 3;
+    background: green;
+
+    transition: all 0.3s ease-in-out;
+
+    height: 35%;
+    width: max-content;
+    min-width: 100%;
+
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+
+    visibility: hidden;
+}
+
+#todoDetailsNameHeading {
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+#todoDetailsName {
+    font-weight: normal;
+}
+
+#todoDetailsDateHeading {
+    margin-top: -5px;
+    font-weight: bold;
+}
+
+#todoDetailsDate {
+    font-weight: normal;
+}
+
+#todoDetailsDescriptionHeading {
+    font-weight: bold;
+    margin-top: -5px;
+    border-bottom: 1px solid black;
+}
+
+#todoDetailsDescription {
+    margin-left: 40px;
+    width: calc(100% - 90px);
+    height: calc(100% - 170px);
+
+    margin-top: -5px;
+
+    border-radius: 2px;
+    background-color: rgb(255, 255, 255, 0.5);
+    border: 1.5px solid rgb(255, 255, 255, 0.5);
+    resize: none;
+
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    outline: none;
+}
+
+#todoDetailsDescription:not([disabled])  {
+    border: 1.5px solid rgb(155, 195, 248);
+    outline: none;
+}
+
+.editTodoDescription {
+    transform: scale(0.8)
+}

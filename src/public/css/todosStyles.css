@@ -7,8 +7,8 @@
 
     background: rgba(255, 255, 255, 0.3);
     border-radius: 5px;
-}
 
+}
 
 .createNewTodo {
     position: absolute;
@@ -34,10 +34,10 @@
 
     display: flex;
     visibility: hidden;
-    transition: all 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 
-    width: calc(20vw - 80px);
-    height: 38px;
+    width: calc(25vw - 80px);
+    height: 70px;
 
     bottom: 45px;
     flex-direction: row;
@@ -55,7 +55,7 @@
 
     background-color: rgb(255, 255, 255, 0.5);
 
-    width: calc(20vw - 200px);
+    width: calc(20vw - 130px);
 
     border: 1.5px solid rgb(255, 255, 255, 0.5);
     border-radius: 5px;
@@ -74,12 +74,11 @@
 }
 .enterTodoBtn {
     height: 20px;
-    margin-top: 11px;
+    margin-top: 25px;
     margin-left: 10px;
-    
+
     cursor: pointer;
 }
-
 
 /* ---------- TODOS ---------- */
 
@@ -88,15 +87,28 @@
     margin-right: 30px;
 }
 
+#todoDate {
+    position: absolute;
+    font-size: 10px;
+
+    right: 5px;
+    padding-top: 5px;
+
+    color: rgb(84, 84, 84);
+}
+
 .input-controller_todos {
     transform: translateZ(0);
 }
 
 .input-controller_todos textarea {
     border: none;
-    background: rgb(163, 207, 255);
+    background: none;
     border-radius: 2px;
-    width: calc(100% - 45px);
+    width: calc(100% - 110px);
+
+    white-space: nowrap;
+    overflow-x: auto;
 
     margin-bottom: 5px;
 
@@ -105,6 +117,42 @@
 
     resize: none;
 }
+
+.input-controller_todos textarea:not([disabled]) {
+    outline: none;
+}
+
+.input-controller_todos textarea:disabled {
+    outline: none;
+}
+
+/* scroll bar todos */
+.input-controller_todos textarea::-webkit-scrollbar {
+    height: 0.5em;
+    display: none;
+}
+
+.input-controller_todos textarea:hover::-webkit-scrollbar {
+    display: block;
+}
+
+.input-controller_todos textarea::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+#todosContainer {
+    background: rgb(163, 207, 255);
+    width: calc(100% - 30px);
+    border-radius: 2px;
+    height: 38px;
+}
+
+#todosContainer:hover {
+    background: rgb(163, 207, 255, 0.7);
+}
+
+
 /* ---------- EDIT TODOS ---------- */
 
 .update-controller button {

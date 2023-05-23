@@ -10,10 +10,14 @@ function showAndHideTodoInputField() {
 }
 
 function showTodoInput() {
+    hideTodoDetails();
+
     todoInput.style.visibility = "visible";
     todoInput.style.opacity = "1";
     document.querySelector(".createNewTodo").innerHTML = "- create new Todo";
     this.isClicked = true;
+
+    hideListInput();
 }
 
 function hideTodoInput() {

@@ -14,6 +14,8 @@ function showListInput() {
     listInput.style.opacity = "1";
     document.querySelector(".createNewList").innerHTML = "- create new List";
     this.isClicked = true;
+
+    hideTodoInput();
 }
 
 function hideListInput() {

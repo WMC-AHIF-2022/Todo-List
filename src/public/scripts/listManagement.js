@@ -31,6 +31,7 @@ function displayLists(lists) {
 
 // listName about todos
 function setListName(listName) {
+    hideTodoDetails();
     document.querySelector("#listTitle").innerText = listName;
 }
 
@@ -126,6 +127,10 @@ function activateEditListener_lists() {
 
     editBtn.forEach((eb, i) => {
         eb.addEventListener('click', () => {
+            hideTodoDetails();
+            hideTodoInput();
+            hideListInput();
+
             updateController[i].style.display = "block";
             inputs[i].disabled = false;
             inputs[i].focus();

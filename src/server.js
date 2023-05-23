@@ -21,7 +21,17 @@ app.listen(port, () => {
 
 // ---------- TODOS ----------
 app.get("/api/getTodos", (req, res) => {
-    db.query(`SELECT * FROM TODOS WHERE LISTID = ${req.query.currentListID}`, (err, rows) => {
+    db.query(`SELECT ID, NAME, DONE, DATE_FORMAT(DEADLINE, '%d.%m.%Y') AS DEADLINESTRING, DESCRIPTION FROM TODOS WHERE LISTID = ${req.query.currentListID} ORDER BY DEADLINE`, (err, rows) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.send(rows);
+    })
+})
+
+app.get("/api/getTodoByID", (req, res) => {
+    db.query(`SELECT ID, NAME, DONE, DATE_FORMAT(DEADLINE, '%d.%m.%Y') AS DEADLINESTRING, DESCRIPTION FROM TODOS WHERE ID = ${req.query.currentID}`, (err, rows) => {
         if (err) {
             console.log(err);
             return;
@@ -31,7 +41,7 @@ app.get("/api/getTodos", (req, res) => {
 })
 
 app.post("/api/createTodo", (req, res) => {
-    db.query(`INSERT INTO TODOS (name, done, listId) VALUES ('${req.body.value}', false, ${req.body.index})`, (err, rows) => {
+    db.query(`INSERT INTO TODOS (name, done, listId, deadline) VALUES ('${req.body.value}', false, ${req.body.index}, STR_TO_DATE('${req.body.deadline}', '%d.%m.%Y'))`, (err, rows) => {
         if (err) {
             console.log(err);
             return;
@@ -41,12 +51,21 @@ app.post("/api/createTodo", (req, res) => {
 })
 
 app.put("/api/editTodo", (req, res) => {
-    console.log(req.body.value);
     if (req.body.value.length > 40) {
         res.status(400).json({ message: "input too long"});
         return;
     }
     db.query(`UPDATE TODOS SET NAME = '${req.body.value}' WHERE ID = ${req.body.index}`, (err, rows) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.send(rows);
+    })
+})
+
+app.put("/api/editTodoDescription", (req, res) => {
+    db.query(`UPDATE TODOS SET DESCRIPTION = '${req.body.value}' WHERE ID = ${req.body.index}`, (err, rows) => {
         if (err) {
             console.log(err);
             return;
@@ -86,6 +105,7 @@ app.get("/api/getLists", (req, res) => {
     })
 })
 
+
 app.post("/api/createList", (req, res) => {
     db.query(`INSERT INTO LISTS (name) VALUES ('${req.body.value}')`, (err, rows) => {
         if (err) {
@@ -123,7 +143,6 @@ app.delete("/api/deleteList", (req, res) => {
 
 // ---------- SEARCH ----------
 app.get("/api/search/getTodosWithOccurringLetters", (req, res) => {
-    console.log(req.query.letter)
     db.query(`SELECT * FROM TODOS WHERE LOWER(NAME) LIKE '%${req.query.letter}%';`, (err, rows) => {
         if (err) {
             console.log(err);
@@ -134,7 +153,6 @@ app.get("/api/search/getTodosWithOccurringLetters", (req, res) => {
 })
 
 app.get("/api/search/getListsWithOccurringLetters", (req, res) => {
-    console.log(req.query.letter)
     db.query(`SELECT * FROM LISTS WHERE LOWER(NAME) LIKE '%${req.query.letter}%';`, (err, rows) => {
         if (err) {
             console.log(err);

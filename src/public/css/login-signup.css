@@ -1,0 +1,68 @@
+.login-signup {
+    position: fixed;
+
+    left: 50vw;
+    top: 50vh;
+    transform: translate(-50%, -50%);
+
+    font-family: Arial, Helvetica, serif;
+    background-color: rgb(255, 255, 255, 0.5);
+
+    text-align: center;
+    padding-top: 10px;
+
+    border-radius: 5px;
+    width: 300px;
+    height: 240px;
+}
+
+.login-signup input {
+    margin-bottom: 20px;
+
+    background-color: rgb(255, 255, 255, 0.5);
+
+    width: calc(300px - 100px);
+
+    border: 1.5px solid rgb(255, 255, 255, 0.5);
+    border-radius: 5px;
+
+    padding: 5px;
+    height: 15px;
+}
+
+.login-signup input:focus {
+    outline: none;
+    border: 1.5px solid rgb(155, 195, 248);
+}
+
+#noAccount {
+    font-size: 10px;
+
+    color: darkred;
+
+    width: 100%;
+    margin-left: 45px;
+    text-align: left;
+    margin-top: 30px;
+}
+
+#noAccount:hover {
+    cursor: pointer;
+}
+
+#loginSignupButton {
+    width: calc(100% - 90px);
+    border: none;
+    background: white;
+    border-radius: 5px;
+
+    text-align: center;
+
+    position: absolute;
+    margin-bottom: 20px;
+    margin-left: 45px;
+}
+
+#loginSignupButton:active {
+    background: rgba(255, 255, 255, 0.8);
+}

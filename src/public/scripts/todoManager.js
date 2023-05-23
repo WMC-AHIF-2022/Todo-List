@@ -1,15 +1,18 @@
 let currentlyEditingTodoID;
-let htmlInputItem_todos;
+let htmlElement_todoName;
+let htmlElement_todoDeadline;
 let currentListID;
 
 let todos; // from db
 
 // when input is entered a new task is created
 function createTodoButtonPressed() {
-    htmlInputItem_todos = document.querySelector("#newTodo");
+    htmlElement_todoName = document.querySelector("#newTodo");
+    htmlElement_todoDeadline = document.querySelector("#newTodoDate");
+
     // when input is not null
-    if (htmlInputItem_todos.value) {
-        createTodo(htmlInputItem_todos);
+    if (htmlElement_todoName.value && htmlElement_todoDeadline.value) {
+        createTodo();
     }
 }
 
@@ -17,11 +20,14 @@ function displayTodos() {
     // add new item to html
     let displayedTodos = "";
     for (let i = 0; i < todos.length; i++) {
-        displayedTodos += `<div class="item">
-                    <div class="input-controller_todos"> <!-- html element where the item is displayed -->
+        displayedTodos += `<div class="item" style="margin-bottom: 10px;">
+                    <div class="input-controller_todos" onclick="showTodoDetails(${todos[i].ID}, '${todos[i].NAME}', '${todos[i].DEADLINESTRING}')"> <!-- html element where the item is displayed -->
+                    <div id="todosContainer"> 
+                        <p id="todoDate">${todos[i].DEADLINESTRING}</p>
                         <label>
                             <textarea onkeydown="onKeyDown_todos(event, this.value, this)" disabled>${todos[i].NAME}</textarea>
                         </label>
+                    </div>
                         <div class="edit-controller_todos">
                             <i class="fa fa-duotone fa-check deleteBtn" style="transform: scale(0.9)" onclick="deleteTodo(${todos[i].ID})"></i>
                             <i class="fa fa-pencil editBtn_todos" style="transform: scale(0.8)" onclick="activateEditListener_todos();"></i>
@@ -59,25 +65,25 @@ async function getTodos(listID) {
         let res = await fetch(`/api/getTodos?currentListID=${listID}`);
         const data = await res.json();
         todos = data; // set db rows to todos
-
         displayTodos();
         return data;
     }
 }
 
-async function createTodo(data) {
+async function createTodo() {
     await fetch("/api/createTodo", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            "value": data.value,
-            "index": currentListID
+            "value": htmlElement_todoName.value,
+            "index": currentListID,
+            "deadline": htmlElement_todoDeadline.value
         }),
     })
 
-    data.value = "";
+    htmlElement_todoName.value = "";
     hideTodoInput(); // showAndHideTodoInputField.js
     refreshTodos();
 }
@@ -136,7 +142,10 @@ function activateEditListener_todos() {
     // check which edit button was pressed
     editBtn.forEach((eb, i) => {
         eb.addEventListener('click', () => {
-            updateController[i].style.display = "block";
+            hideTodoDetails();
+            hideTodoInput();
+            hideListInput();
+
             inputs[i].disabled = false;
             inputs[i].focus();
 

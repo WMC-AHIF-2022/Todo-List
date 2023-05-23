@@ -1,6 +1,7 @@
 let searchInput = document.querySelector("#searchInput");
 let searchBox = document.querySelector(".searchedItems");
 searchInput.addEventListener('focus', () => {
+    hideTodoDetails();
     setTimeout(() => {
         searchBox.style.display = "block";
     }, 300)

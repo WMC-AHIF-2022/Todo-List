@@ -94,6 +94,18 @@
     resize: none;
 }
 
+.input-controller-lists textarea:not([disabled]) {
+    outline: none;
+}
+
+.input-controller-lists textarea:disabled {
+    outline: none;
+}
+
+.input-controller-lists textarea:hover {
+    background: rgb(163, 207, 255, 0.7);
+}
+
 .input-controller-lists {
     margin-left: 40px;
     margin-right: 30px;
