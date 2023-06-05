@@ -115,7 +115,7 @@ app.get("/api/getLists", (req, res) => {
 app.post("/api/createList", (req, res) => {
     db.query(`SELECT ID FROM ACCOUNT`, (err, rows) => { // ermittlung der account id
         // erstellen der liste mit dem werten "name" und "account id"
-        db.query(`INSERT INTO LISTS (NAME, ACCID) VALUES ('${req.body.value}', '${rows[0].ID}')`, (err, rows) => {
+        db.query(`INSERT INTO LISTS (NAME, ACCID) VALUES ('${req.body.value}', '${req.body.accID}')`, (err, rows) => {
             if (err) {
                 console.log(err);
                 return;
