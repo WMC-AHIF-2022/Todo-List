@@ -62,7 +62,7 @@ async function getTodos(listID) {
     if (listID) {
         currentListID = listID;
 
-        let res = await fetch(`/api/getTodos?currentListID=${listID}`);
+        let res = await fetch(`/api/todos/getTodos?currentListID=${listID}`);
         const data = await res.json();
         todos = data; // set db rows to todos
         displayTodos();
@@ -71,7 +71,7 @@ async function getTodos(listID) {
 }
 
 async function createTodo() {
-    await fetch("/api/createTodo", {
+    await fetch("/api/todos/createTodo", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -84,12 +84,12 @@ async function createTodo() {
     })
 
     htmlElement_todoName.value = "";
-    hideTodoInput(); // showAndHideTodoInputField.js
+    hideTodoInput(); // show-hide-todoInputField.js
     refreshTodos();
 }
 
 async function updateTodo(name) {
-    await fetch("/api/editTodo", {
+    await fetch("/api/todos/editTodo", {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -107,7 +107,7 @@ async function updateTodo(name) {
 
 // ---------- delete todos ----------
 async function deleteTodo(id) {
-    await fetch("/api/deleteTodo", {
+    await fetch("/api/todos/deleteTodo", {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
@@ -120,7 +120,7 @@ async function deleteTodo(id) {
 }
 
 async function deleteAllTodosFromList(listId) {
-    await fetch("/api/deleteAllTodosFromList", {
+    await fetch("/api/todos/deleteAllTodosFromList", {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",

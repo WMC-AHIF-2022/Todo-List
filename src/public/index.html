@@ -27,7 +27,7 @@
                 placeholder="Enter new list">
             <i class="fa fa-duotone fa-check enterListBtn" id="enterList"></i>
         </div>
-        <button class="createNewList" onclick="showAndHideListInputField()">+ create new List</button>
+        <button class="createNewList" onclick="showHideListInputField()">+ create new List</button>
     </div>
 
 
@@ -61,7 +61,7 @@
             <input id="newTodoDate" style="position: absolute; top: 30px; left: 68px;" type="text" placeholder="TT.MM.JJJJ" pattern="\d{2}\.\d{2}\.\d{4}">
             <i class="fa fa-duotone fa-check enterTodoBtn" id="enterTodo" onclick="createTodoButtonPressed()"></i>
         </div>
-        <button class="createNewTodo" onclick="showAndHideTodoInputField()">+ create new Todo</button>
+        <button class="createNewTodo" onclick="showHideTodoInputField()">+ create new Todo</button>
     </div>
 
 
@@ -86,15 +86,15 @@
 
 </div>
 
-<script src="scripts/todoManager.js"></script>
-<script src="scripts/listManagement.js"></script>
-<script src="scripts/showAndHideInputFields/showAndHideTodoInputField.js"></script>
-<script src="scripts/showAndHideInputFields/showAndHideListInputField.js"></script>
-<script src="scripts/showAndHideTodos/showAndHideTodos.js"></script>
-<script src="scripts/showAndHideSearchBox/showAndHideSearchBox.js"></script>
-<script src="scripts/showAndHideTodoDetails/showAndHideTodoDetails.js"></script>
+<script src="scripts/todo-list-management/todoManager.js"></script>
+<script src="scripts/todo-list-management/listManagement.js"></script>
+<script src="scripts/show-hide/show-hide-inputFields/show-hide-todoInputField.js"></script>
+<script src="scripts/show-hide/show-hide-inputFields/show-hide-listInputField.js"></script>
+<script src="scripts/show-hide/show-hide-todos/show-hide-todos.js"></script>
+<script src="scripts/show-hide/show-hide-searchBox/show-hide-searchBox.js"></script>
+<script src="scripts/show-hide/show-hide-todoDetails/show-hide-todoDetails.js"></script>
 <script src="scripts/search.js"></script>
 <script src="scripts/todoDetails.js"></script>
-<script src="login-signup/logout.js"></script>
+<script src="scripts/login-signup-logout/logout.js"></script>
 </body>
 </html>

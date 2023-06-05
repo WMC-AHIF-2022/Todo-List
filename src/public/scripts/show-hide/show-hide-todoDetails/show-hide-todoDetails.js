@@ -1,7 +1,7 @@
 const detailsHTMLElement = document.querySelector(".todoDetails");
 let isVisible = false;
 
-function showAndHideTodoDetails() {
+function showHideTodoDetails() {
     if (isVisible) {
         hideTodoDetails();
         isVisible = false;

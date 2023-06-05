@@ -12,7 +12,7 @@ function displayLists(lists) {
     let displayedLists = "";
     for (let i = 0; i < lists.length; i++) {
         displayedLists += `<div class="item">
-                    <div class="input-controller-lists" onclick="getTodos(${lists[i].ID}); setListName('${lists[i].NAME}'); showAndHideTodos('${lists[i].ID}')" style="transform: translateZ(0);">
+                    <div class="input-controller-lists" onclick="getTodos(${lists[i].ID}); setListName('${lists[i].NAME}'); showHideTodos('${lists[i].ID}')" style="transform: translateZ(0);">
                         <label>
                             <textarea onkeydown="onKeyDown_lists(event, this.value, this)" disabled>${lists[i].NAME}</textarea>
                         </label>
@@ -54,12 +54,12 @@ function refreshLists() {
 }
 
 async function getLists() {
-    let res = await fetch (`/api/getLists?accID=${sessionStorage.getItem("userID")}`);
+    let res = await fetch (`/api/lists/getLists?accID=${sessionStorage.getItem("userID")}`);
     return await res.json();
 }
 
 async function createList(data) {
-    await fetch("/api/createList", {
+    await fetch("/api/lists/createList", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -71,12 +71,12 @@ async function createList(data) {
     })
 
     data.value = "";
-    hideListInput(); // showAndHideListInputField.js
+    hideListInput(); // show-hide-listInputField.js
     refreshLists();
 }
 
 async function updateList(name) {
-    await fetch("/api/editList", {
+    await fetch("/api/lists/editList", {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -95,7 +95,7 @@ async function updateList(name) {
 async function deleteList(id) {
     await checkIfTodosLeft(id);
 
-    await fetch("/api/deleteList", {
+    await fetch("/api/lists/deleteList", {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",

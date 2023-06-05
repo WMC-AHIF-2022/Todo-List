@@ -6,7 +6,7 @@ let text_loginSignup = document.getElementById("noAccount");
 let button_loginSignup = document.getElementById("loginSignupButton");
 let isLogin = true;
 
-function changeLoginSignup() {
+function changeLoginChangeSignup() {
     if (isLogin) {
         changeToSignup();
         isLogin = false;

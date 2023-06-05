@@ -1,6 +1,6 @@
 let currentList = document.querySelector(".currentList");
 
-function showAndHideTodos(listID) {
+function showHideTodos(listID) {
     if (listID == currentListList) {
         hideTodos();
         currentListList = -1;

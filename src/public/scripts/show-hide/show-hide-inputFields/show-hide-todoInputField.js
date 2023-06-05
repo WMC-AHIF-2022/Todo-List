@@ -1,7 +1,7 @@
 let todoInput = document.querySelector(".todoInput")
 isClicked = false;
 
-function showAndHideTodoInputField() {
+function showHideTodoInputField() {
     if (isClicked) {
         hideTodoInput();
     } else {

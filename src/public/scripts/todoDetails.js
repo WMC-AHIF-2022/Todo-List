@@ -3,7 +3,7 @@ let currentEditingTodoDeadline;
 
 function showTodoDetails(id, name, deadline) {
     if (id === currentlyEditingTodoID) {
-        showAndHideTodoDetails();
+        showHideTodoDetails();
     }
 
     currentEditingTodoName = name;

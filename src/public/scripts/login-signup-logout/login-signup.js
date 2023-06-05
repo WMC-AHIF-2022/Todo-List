@@ -10,8 +10,7 @@ function loginSignup(value) {
 }
 
 async function signup() {
-    console.log("test")
-    const res = await fetch("/api/signup", {
+    const res = await fetch("/api/loginSignup/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json", },
         body: JSON.stringify({
@@ -25,19 +24,19 @@ async function signup() {
         sessionStorage.setItem("userID", data.insertedId);
         sessionStorage.setItem("username", usernameField.value);
 
-        window.location.href = "../index.html";
+        window.location.href = "../../index.html";
     }
 }
 
 async function login() {
-    let res = await fetch(`/api/login?username=${usernameField.value}&password=${passwordField.value}`)
+    let res = await fetch(`/api/loginSignup/login?username=${usernameField.value}&password=${passwordField.value}`)
 
     if (res.ok) {
         const data = await res.json();
         sessionStorage.setItem("userID", data.currentID);
         sessionStorage.setItem("username", data.currentUsername);
 
-        window.location.href="../index.html";
+        window.location.href="../../index.html";
     } else {
         document.querySelector("#loginErrorText").innerText = "Invalid username or password."
     }
