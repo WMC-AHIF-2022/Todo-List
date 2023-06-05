@@ -53,8 +53,8 @@ function refreshLists() {
     })
 }
 
-async function getLists() {
-    let res = await fetch ("/api/getLists");
+async function getLists() { // TODO
+    let res = await fetch (`/api/getLists?accID=${sessionStorage.getItem("userID")}`);
     return await res.json();
 }
 

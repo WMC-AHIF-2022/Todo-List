@@ -1,15 +1,18 @@
+let usernameInputField = document.querySelector("#usernameInput");
+let passwordInputField = document.querySelector("#passwordInput");
+
 let heading_loginSignup = document.getElementById("login-signup_heading");
 let text_loginSignup = document.getElementById("noAccount");
 let button_loginSignup = document.getElementById("loginSignupButton");
-let login = true;
+let isLogin = true;
 
 function changeLoginSignup() {
-    if (login) {
+    if (isLogin) {
         changeToSignup();
-        login = false;
+        isLogin = false;
     } else {
         changeToLogin();
-        login = true;
+        isLogin = true;
     }
 }
 
@@ -18,6 +21,10 @@ function changeToSignup() {
     text_loginSignup.innerText = "Have an account";
     text_loginSignup.style.color = "darkgreen";
     button_loginSignup.innerHTML = "Signup";
+
+    document.querySelector("#loginErrorText").innerText = "";
+    passwordInputField.value = "";
+    usernameInputField.value = "";
 }
 
 function changeToLogin() {
@@ -25,4 +32,7 @@ function changeToLogin() {
     text_loginSignup.innerText = "Don't have an account";
     text_loginSignup.style.color = "darkred";
     button_loginSignup.innerHTML = "Login";
+
+    passwordInputField.value = "";
+    usernameInputField.value = "";
 }

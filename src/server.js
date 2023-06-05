@@ -12,12 +12,17 @@ const db = mySQL.createConnection({
 
 const port = 3000;
 
+app.get("/", (req, res) => {
+    res.redirect('/login-signup/login-signup.html');
+})
+
 app.use(express.static(__dirname + "/public"));
 app.use(express.json());
 
 app.listen(port, () => {
     console.log("Server listening on port " + port);
 })
+
 
 // ---------- TODOS ----------
 app.get("/api/getTodos", (req, res) => {
@@ -96,7 +101,8 @@ app.delete("/api/deleteAllTodosFromList", (req, res) => {
 
 // ---------- LISTS ----------
 app.get("/api/getLists", (req, res) => {
-    db.query("SELECT * FROM LISTS", (err, rows) => {
+    console.log(req.query)
+    db.query(`SELECT * FROM LISTS WHERE ACCID = '${req.query.accID}'`, (err, rows) => {
         if (err) {
             console.log(err);
             return;
@@ -107,13 +113,16 @@ app.get("/api/getLists", (req, res) => {
 
 
 app.post("/api/createList", (req, res) => {
-    db.query(`INSERT INTO LISTS (name) VALUES ('${req.body.value}')`, (err, rows) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
-        res.send(rows);
-    })
+    db.query(`SELECT ID FROM ACCOUNT`, (err, rows) => { // ermittlung der account id
+        // erstellen der liste mit dem werten "name" und "account id"
+        db.query(`INSERT INTO LISTS (NAME, ACCID) VALUES ('${req.body.value}', '${rows[0].ID}')`, (err, rows) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            res.send(rows);
+        })
+    });
 })
 
 app.put("/api/editList", (req, res) => {
@@ -159,5 +168,38 @@ app.get("/api/search/getListsWithOccurringLetters", (req, res) => {
             return;
         }
         res.send(rows);
+    });
+})
+
+
+// ---------- LOGIN / SIGNUP ----------
+app.post('/api/signup', (req, res) => {
+    const query = 'INSERT INTO ACCOUNT (USERNAME, PASSWORD) VALUES (?, ?)';
+    const values = [req.body.username, req.body.password];
+    const sql = mySQL.format(query, values);
+
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.log(err);
+            res.status(500);
+        } else {
+            const insertedId = result.insertId;
+            res.status(200).json({ insertedId: insertedId });
+        }
+    });
+});
+
+app.get("/api/login", (req, res) => {
+    db.query(`SELECT ID, USERNAME FROM ACCOUNT WHERE USERNAME = '${req.query.username}' AND PASSWORD = '${req.query.password}'`, (err, rows) => {
+        if (err) {
+            console.log(err);
+        }
+        if (rows.length > 0) {
+            const currentID = rows[0].ID;
+            const currentUsername = rows[0].USERNAME;
+            res.status(200).json({currentID: currentID, currentUsername: currentUsername});
+            return;
+        }
+        res.status(400);
     });
 })

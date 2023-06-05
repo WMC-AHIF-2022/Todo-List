@@ -66,3 +66,14 @@
 #loginSignupButton:active {
     background: rgba(255, 255, 255, 0.8);
 }
+
+#loginErrorText {
+    font-size: 10px;
+
+    color: darkred;
+
+    width: 100%;
+    margin-left: 45px;
+    margin-top: -5px;
+    text-align: left;
+}

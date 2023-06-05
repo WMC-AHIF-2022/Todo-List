@@ -13,13 +13,15 @@
 
     <input id="usernameInput" placeholder="Enter username"> <br>
 
-    <input id="passwordInput" placeholder="Enter password"> <br>
+    <input id="passwordInput" type="password" placeholder="Enter password"> <br>
 
-    <button id="loginSignupButton">Login</button>
+    <button id="loginSignupButton" onclick="loginSignup(this.innerHTML)">Login</button>
 
     <p id="noAccount" onclick="changeLoginSignup()">Don't have an account</p>
+    <p id="loginErrorText"></p>
   </div>
 
+  <script src="login-signup.js"></script>
   <script src="changeLogin-signup.js"></script>
 </body>
 </html>

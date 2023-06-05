@@ -75,6 +75,15 @@
         </p>
         <textarea id="todoDetailsDescription" disabled onkeydown="onKeyDown_todoDetails(event, this.value, this)"></textarea>
     </div>
+
+    <!-- ---------- ACC OPTIONS ---------- -->
+    <div class="dropdown">
+        <button class="dropdown-btn"></button><i class="fa-regular fa-chevron-down" style="transform: scale(0.8);"></i>
+        <div class="dropdown-content">
+            <a href="#" onclick="logout()">Logout</a>
+        </div>
+    </div>
+
 </div>
 
 <script src="scripts/todoManager.js"></script>
@@ -86,5 +95,6 @@
 <script src="scripts/showAndHideTodoDetails/showAndHideTodoDetails.js"></script>
 <script src="scripts/search.js"></script>
 <script src="scripts/todoDetails.js"></script>
+<script src="login-signup/logout.js"></script>
 </body>
 </html>
