@@ -15,6 +15,8 @@
     visibility: hidden;
 }
 
+/* ---------- DETAILS NAME ---------- */
+
 #todoDetailsNameHeading {
     margin-top: 30px;
     font-weight: bold;
@@ -24,29 +26,46 @@
     font-weight: normal;
 }
 
-#todoDetailsDateHeading {
-    margin-top: -5px;
-    font-weight: bold;
+
+/* ---------- DETAILS DATE  ---------- */
+
+#todoDetailsDateContainer {
+    display: flex;
+    align-items: center;
 }
 
-#todoDetailsDate {
-    font-weight: normal;
-    position: fixed;
+#todoDetailsDateHeading {
+    margin: 0;
+    font-weight: bold;
+}
+#todoDetailsDate-inputField:disabled {
+    -webkit-text-fill-color: #000000;
+}
 
+#todoDetailsDate-inputField {
+    font-weight: normal;
     border: none;
     outline: none;
 
-    top: 141px;
+    width: 83px;
 
     font-size: 16px;
     color: black;
 
     resize: none;
     background: none;
+    margin-left: 5px;
+    margin-top: 0;
 }
-#todoDetailsDate:disabled {
-    -webkit-text-fill-color: #000000;
+
+.editDate-Details {
+    transform: scale(0.8);
 }
+.editDate-Details:hover {
+    cursor: pointer;
+}
+
+/* ---------- DETAILS DESCRIPTION ---------- */
 
 #todoDetailsDescriptionHeading {
     font-weight: bold;
@@ -82,13 +101,5 @@
     transform: scale(0.8);
 }
 .editTodoDescription:hover {
-    cursor: pointer;
-}
-
-.editDate-Details {
-    margin-left: 90px;
-    transform: scale(0.8);
-}
-.editDate-Details:hover {
     cursor: pointer;
 }

@@ -61,6 +61,7 @@ button {
     background: rgb(155, 195, 248);
 }
 
+
 /* ---------- SEARCH BOX ---------- */
 .searchBox {
     margin-top: 20px;
@@ -82,6 +83,7 @@ button {
     width: calc(100% - 25px);
     outline: none;
 }
+
 
 /* ---------- ACC OPTIONS ---------- */
 .dropdown {

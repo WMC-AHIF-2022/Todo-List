@@ -17,7 +17,7 @@ function displayLists(lists) {
                             <textarea onkeydown="onKeyDown_lists(event, this.value, this)" disabled>${lists[i].NAME}</textarea>
                         </label>
                         <div class="edit-controller">
-                            <i class="fa-regular fa-trash deleteBtn" style="transform: scale(0.8)" onclick="deleteList(${lists[i].ID})"></i>
+                            <i class="fa fa-trash deleteBtn" style="transform: scale(0.8)" onclick="deleteList(${lists[i].ID})"></i>
                             <i class="fa fa-pencil editBtn" style="transform: scale(0.8); margin-top: 2px;" onclick="activateEditListener_lists();"></i>
                         </div>
                     </div>

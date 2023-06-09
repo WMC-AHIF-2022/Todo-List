@@ -120,7 +120,3 @@
 
     cursor: pointer;
 }
-
-.editBtn:hover {
-    background: green;
-}

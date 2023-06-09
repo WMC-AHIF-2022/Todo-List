@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/todoDetails.css">
 
     <script src="https://kit.fontawesome.com/5548ac9694.js" crossorigin="anonymous"></script></head>
+    <link rel="shortcut icon" href="#">
 <body>
 <div class="grid-container">
     <!-- ---------- NAVBAR ---------- -->
@@ -26,6 +27,7 @@
                 id="newList"
                 placeholder="Enter new list">
             <i class="fa fa-duotone fa-check enterListBtn" id="enterList"></i>
+
         </div>
         <button class="createNewList" onclick="showHideListInputField()">+ create new List</button>
     </div>
@@ -68,7 +70,16 @@
     <!-- ---------- TODOS DETAILS ---------- -->
     <div class="todoDetails">
         <p id="todoDetailsNameHeading">Name: <span id="todoDetailsName">bla bla</span></p>
-        <p id="todoDetailsDateHeading">Date: <input pattern="\d{2}\.\d{2}\.\d{4}" disabled id="todoDetailsDate" onkeydown="onKeyDown_dateDetails(event, this.value, this)"></input><i class="fa fa-pencil editDate-Details" onclick="editDate_description()"></i></p>
+
+        <div style="margin-left: 40px; margin-bottom: 10px; margin-top: -10px;" id="todoDetailsDateContainer">
+            <p id="todoDetailsDateHeading">Date: </p>
+            <div style="display: flex; align-items: center;">
+                <input pattern="\d{2}\.\d{2}\.\d{4}" disabled id="todoDetailsDate-inputField" onkeydown="onKeyDown_dateDetails(event, this.value, this)"></input>
+
+                <i class="fa fa-pencil editDate-Details" onclick="editDate_description()"></i>
+            </div>
+        </div>
+
         <p id="todoDetailsDescriptionHeading">
             Description
             <i class="fa fa-pencil editTodoDescription" onclick="editTodoDescription()"></i>
@@ -78,7 +89,7 @@
 
     <!-- ---------- ACC OPTIONS ---------- -->
     <div class="dropdown">
-        <button class="dropdown-btn"></button><i class="fa-regular fa-chevron-down" style="transform: scale(0.8);"></i>
+        <button class="dropdown-btn"></button><i class="fa-solid fa-chevron-down" style="transform: scale(0.8);"></i>
         <div class="dropdown-content">
             <a href="#" onclick="logout()">Logout</a>
         </div>

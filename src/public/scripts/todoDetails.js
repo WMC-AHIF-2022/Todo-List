@@ -11,7 +11,7 @@ function showTodoDetails(id, name, deadline) {
     currentTodoID = id;
 
     document.querySelector("#todoDetailsName").innerHTML = name;
-    document.querySelector("#todoDetailsDate").value = deadline;
+    document.querySelector("#todoDetailsDate-inputField").value = deadline;
 
     refreshTodoDetails();
 }
@@ -73,7 +73,7 @@ function editTodoDescription() {
 }
 
 function editDate_description() {
-    const todoDetailsDate = document.querySelector("#todoDetailsDate");
+    const todoDetailsDate = document.querySelector("#todoDetailsDate-inputField");
 
     todoDetailsDate.disabled = false;
     todoDetailsDate.focus();
