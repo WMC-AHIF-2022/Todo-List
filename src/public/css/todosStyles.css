@@ -107,6 +107,8 @@
     border-radius: 2px;
     width: calc(100% - 110px);
 
+    cursor: pointer;
+
     white-space: nowrap;
     overflow-x: auto;
 

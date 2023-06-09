@@ -1,19 +1,61 @@
-let currentlyEditingTodoID;
-let htmlElement_todoName;
-let htmlElement_todoDeadline;
+let currentTodoID;
 let currentListID;
+
+let name_inputElement;
+let date_inputElement;
 
 let todos; // from db
 
-// when input is entered a new task is created
 function createTodoButtonPressed() {
-    htmlElement_todoName = document.querySelector("#newTodo");
-    htmlElement_todoDeadline = document.querySelector("#newTodoDate");
+    name_inputElement = document.querySelector("#newTodo");
+    date_inputElement = document.querySelector("#newTodoDate");
 
-    // when input is not null
-    if (htmlElement_todoName.value && htmlElement_todoDeadline.value) {
-        createTodo();
+    // check if input fields are not null
+    if (checkInputFields()) {
+        // check if date is valid
+        if (checkDate(date_inputElement.value)) {
+            // check if name does not start with ' ' (no empty string allowed)
+            if (name_inputElement.value.startsWith(' ')) {
+                alert("Name must not start with a space");
+            } else {
+                createTodo();
+            }
+        }
     }
+}
+
+// check if name of task and date are null
+function checkInputFields() {
+    if (date_inputElement.value && name_inputElement.value) {
+        return true;
+    }
+
+    // if name is null
+    if (name_inputElement.value) { // if date is null
+        date_inputElement.style.border = "1.5px solid #F78181";
+        setTimeout(() => {
+            date_inputElement.style.border = "1.5px solid rgb(255, 255, 255, 0.5)"
+        }, 1500);
+        return false;
+    }
+
+    // if date is null
+    if (date_inputElement.value) { // if name is null
+        name_inputElement.style.border = "1.5px solid #F78181";
+        setTimeout(() => {
+            name_inputElement.style.border = "1.5px solid rgb(255, 255, 255, 0.5)"
+        }, 1500);
+        return false;
+    }
+
+    // is both are null
+    date_inputElement.style.border = "1.5px solid #F78181";
+    name_inputElement.style.border = "1.5px solid #F78181";
+    setTimeout(() => {
+        date_inputElement.style.border = "1.5px solid rgb(255, 255, 255, 0.5)"
+        name_inputElement.style.border = "1.5px solid rgb(255, 255, 255, 0.5)"
+    }, 1500);
+    return false;
 }
 
 function displayTodos() {
@@ -77,13 +119,15 @@ async function createTodo() {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            "value": htmlElement_todoName.value,
+            "value": name_inputElement.value,
             "index": currentListID,
-            "deadline": htmlElement_todoDeadline.value
+            "deadline": date_inputElement.value,
+            "userID": sessionStorage.getItem("userID")
         }),
     })
 
-    htmlElement_todoName.value = "";
+    name_inputElement.value = "";
+    date_inputElement.value = "";
     hideTodoInput(); // show-hide-todoInputField.js
     refreshTodos();
 }
@@ -96,7 +140,7 @@ async function updateTodo(name) {
         },
         body: JSON.stringify({
             value: name,
-            index: currentlyEditingTodoID
+            index: currentTodoID
         }),
     }).catch((err) => {
         console.log(err.message);
@@ -149,7 +193,7 @@ function activateEditListener_todos() {
             inputs[i].disabled = false;
             inputs[i].focus();
 
-            currentlyEditingTodoID = updateController[i].dataset.dbid;
+            currentTodoID = updateController[i].dataset.dbid;
         })
     })
 }

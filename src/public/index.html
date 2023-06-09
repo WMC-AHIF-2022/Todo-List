@@ -34,7 +34,7 @@
     <!-- ---------- SEARCH BOX ---------- -->
     <div class="searchBox">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input id ="searchInput" placeholder="Search" onkeydown="displaySearchedTodos(event)">
+        <input id ="searchInput" placeholder="Search">
 
     </div>
     <div class="searchedItems">
@@ -46,7 +46,7 @@
     </div>
 
 
-    <!-- ---------- CURRENT LIST ---------- -->
+    <!-- ---------- CURRENT LIST (TODOS) ---------- -->
     <div class="currentList">
         <p class="title" id="listTitle"></p>
 
@@ -58,7 +58,7 @@
             <input type="text" id="newTodo" placeholder="Enter new todo">
 
             <p style="position: absolute; top: 30px;">Date:</p>
-            <input id="newTodoDate" style="position: absolute; top: 30px; left: 68px;" type="text" placeholder="TT.MM.JJJJ" pattern="\d{2}\.\d{2}\.\d{4}">
+            <input id="newTodoDate" style="position: absolute; top: 30px; left: 68px;" type="text" placeholder="DD.MM.YYYY" pattern="\d{2}\.\d{2}\.\d{4}">
             <i class="fa fa-duotone fa-check enterTodoBtn" id="enterTodo" onclick="createTodoButtonPressed()"></i>
         </div>
         <button class="createNewTodo" onclick="showHideTodoInputField()">+ create new Todo</button>
@@ -68,7 +68,7 @@
     <!-- ---------- TODOS DETAILS ---------- -->
     <div class="todoDetails">
         <p id="todoDetailsNameHeading">Name: <span id="todoDetailsName">bla bla</span></p>
-        <p id="todoDetailsDateHeading">Date: <span id="todoDetailsDate">05.05.2023</span></p>
+        <p id="todoDetailsDateHeading">Date: <input pattern="\d{2}\.\d{2}\.\d{4}" disabled id="todoDetailsDate" onkeydown="onKeyDown_dateDetails(event, this.value, this)"></input><i class="fa fa-pencil editDate-Details" onclick="editDate_description()"></i></p>
         <p id="todoDetailsDescriptionHeading">
             Description
             <i class="fa fa-pencil editTodoDescription" onclick="editTodoDescription()"></i>

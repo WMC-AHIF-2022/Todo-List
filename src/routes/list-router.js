@@ -12,8 +12,9 @@ const db = mySQL.createConnection({
 const listsRouter = express.Router();
 module.exports = { "listsRouter": listsRouter };
 
+listsRouter.use(express.json());
+
 listsRouter.get("/getLists", (req, res) => {
-    console.log(req.query)
     db.query(`SELECT * FROM LISTS WHERE ACCID = '${req.query.accID}'`, (err, rows) => {
         if (err) {
             console.log(err);

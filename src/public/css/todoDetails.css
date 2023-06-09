@@ -31,6 +31,21 @@
 
 #todoDetailsDate {
     font-weight: normal;
+    position: fixed;
+
+    border: none;
+    outline: none;
+
+    top: 141px;
+
+    font-size: 16px;
+    color: black;
+
+    resize: none;
+    background: none;
+}
+#todoDetailsDate:disabled {
+    -webkit-text-fill-color: #000000;
 }
 
 #todoDetailsDescriptionHeading {
@@ -64,5 +79,16 @@
 }
 
 .editTodoDescription {
-    transform: scale(0.8)
+    transform: scale(0.8);
+}
+.editTodoDescription:hover {
+    cursor: pointer;
+}
+
+.editDate-Details {
+    margin-left: 90px;
+    transform: scale(0.8);
+}
+.editDate-Details:hover {
+    cursor: pointer;
 }

@@ -12,6 +12,8 @@ const db = mySQL.createConnection({
 const loginSignupRouter = express.Router();
 module.exports = { "loginSignupRouter": loginSignupRouter };
 
+loginSignupRouter.use(express.json());
+
 loginSignupRouter.post('/signup', (req, res) => {
     const query = 'INSERT INTO ACCOUNT (USERNAME, PASSWORD) VALUES (?, ?)';
     const values = [req.body.username, req.body.password];
@@ -29,16 +31,19 @@ loginSignupRouter.post('/signup', (req, res) => {
 });
 
 loginSignupRouter.get("/login", (req, res) => {
-    db.query(`SELECT ID, USERNAME FROM ACCOUNT WHERE USERNAME = '${req.query.username}' AND PASSWORD = '${req.query.password}'`, (err, rows) => {
+    db.query('SELECT ID, USERNAME FROM ACCOUNT WHERE USERNAME = ? AND PASSWORD = ?', [req.query.username, req.query.password], (err, rows) => {
         if (err) {
             console.log(err);
+            res.status(500);
+            return;
         }
+
         if (rows.length > 0) {
             const currentID = rows[0].ID;
             const currentUsername = rows[0].USERNAME;
-            res.status(200).json({currentID: currentID, currentUsername: currentUsername});
-            return;
+            res.status(200).json({ currentID, currentUsername });
+        } else { // if invalid send error to user --> client
+            res.status(400).json({ error: 'Invalid login information' });
         }
-        res.status(400);
     });
-})
+});

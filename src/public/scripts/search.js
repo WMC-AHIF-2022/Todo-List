@@ -1,48 +1,43 @@
-let lettersArr = [];
+let searchInputField = document.querySelector("#searchInput");
 
-// TODO cmd+a does not work
-function displaySearchedTodos(e) {
-    currentListList = -1;
-    if (e.key.match(/^(?:(?!\bShift|Meta|Tab|CapsLock|Escape\b).)*$/i)) {
-        lettersArr.push(e.key);
-    }
-    if (e.key === "Backspace") {
-        lettersArr.splice(lettersArr.length - 2, 2);
-    }
+let search_todosHeading_htmlElement = document.querySelector("#searchedTodosHeading");
+let searchedTodos_htmlElement = document.querySelector(".searchedTodos");
 
-    let letters = "";
-    for (let currentLetter of lettersArr) {
-        letters += currentLetter;
-    }
-    getTodosWithOccurringLetters(letters).then(result => {
-        let editingHTMLElement = document.querySelector(".searchedTodos");
+let search_listsHeading_htmlElement = document.querySelector("#searchedListsHeading");
+let searchedLists_htmlElement = document.querySelector(".searchedLists");
 
-        editingHTMLElement.innerHTML = "";
-        result.forEach((current) => {
-            document.querySelector("#searchedTodosHeading").style.display = "block";
-            editingHTMLElement.innerHTML += `<p>${current.NAME}</p>`;
+// display todos and lists
+searchInputField.addEventListener("keyup", async (e) => {
+    // display searched Todos
+    await getTodosWithOccurringLetters().then((resultTodos) => {
+        search_todosHeading_htmlElement.style.display = "block"
+        searchedTodos_htmlElement.innerHTML = "";
+        resultTodos.forEach((currentTodo) => {
+            searchedTodos_htmlElement.innerHTML += `<p onclick='goToTodo(${currentTodo.ID})' style="cursor: pointer">${currentTodo.NAME}</p>`;
         })
     });
-    document.querySelector("#searchedTodosHeading").style.display = "none";
 
-    getListsWithOccurringLetters(letters).then(result => {
-        let editingHTMLElement = document.querySelector(".searchedLists");
-
-        editingHTMLElement.innerHTML = "";
-        result.forEach((current) => {
-            document.querySelector("#searchedListsHeading").style.display = "block"
-            editingHTMLElement.innerHTML += `<p>${current.NAME}</p>`;
+    // display searched lists
+    await getListsWithOccurringLetters().then((resultLists) => {
+        search_listsHeading_htmlElement.style.display = "block";
+        searchedLists_htmlElement.innerHTML = "";
+        resultLists.forEach((currentList) => {
+            searchedLists_htmlElement.innerHTML = `<p>${currentList.NAME}</p>`;
         })
-    });
-    document.querySelector("#searchedListsHeading").style.display = "none";
+    })
+});
+
+// letters are saved in "searchInputField.value"
+async function getTodosWithOccurringLetters() {
+    let resultTodos = await fetch(`/api/search/getTodosWithOccurringLetters?letter=${searchInputField.value}&userID=${sessionStorage.getItem(("userID"))}`);
+    return await resultTodos.json();
 }
 
-async function getTodosWithOccurringLetters(letter) {
-    let res = await fetch(`/api/search/getTodosWithOccurringLetters?letter=${letter}`);
-    return await res.json();
+async function getListsWithOccurringLetters() {
+    let resultLists = await fetch(`/api/search/getListsWithOccurringLetters?letter=${searchInputField.value}&userID=${sessionStorage.getItem(("userID"))}`);
+    return await resultLists.json();
 }
 
-async function getListsWithOccurringLetters(letter) {
-    let res = await fetch(`/api/search/getListsWithOccurringLetters?letter=${letter}`);
-    return await res.json();
+function goToTodo(id) {
+    console.log("test");
 }
