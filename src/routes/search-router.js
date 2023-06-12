@@ -20,7 +20,6 @@ searchRouter.get("/getTodosWithOccurringLetters", (req, res) => {
             console.log(err);
             return;
         }
-        console.log(rows);
         res.status(200).json(rows);
     });
 })
@@ -32,5 +31,25 @@ searchRouter.get("/getListsWithOccurringLetters", (req, res) => {
             return;
         }
         res.send(rows);
+    });
+})
+
+searchRouter.get("/getListIDFromSearchedTodo", (req, res) => {
+    db.query(`SELECT LISTID FROM TODOS WHERE ID = ${req.query.id}`, (err, row) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.status(200).json(row);
+    });
+});
+
+searchRouter.get("/getSearchedListName", (req, res) => {
+    db.query(`SELECT NAME FROM LISTS WHERE ID = ${req.query.id}`, (err, row) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.status(200).json(row);
     });
 })

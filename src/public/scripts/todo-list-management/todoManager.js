@@ -64,7 +64,7 @@ function displayTodos() {
     for (let i = 0; i < todos.length; i++) {
         displayedTodos += `<div class="item" style="margin-bottom: 10px;">
                     <div class="input-controller_todos" onclick="showTodoDetails(${todos[i].ID}, '${todos[i].NAME}', '${todos[i].DEADLINESTRING}')"> <!-- html element where the item is displayed -->
-                    <div id="todosContainer"> 
+                    <div id="todosContainer" class="todoID_${todos[i].ID}"> 
                         <p id="todoDate">${todos[i].DEADLINESTRING}</p>
                         <label>
                             <textarea onkeydown="onKeyDown_todos(event, this.value, this)" disabled>${todos[i].NAME}</textarea>

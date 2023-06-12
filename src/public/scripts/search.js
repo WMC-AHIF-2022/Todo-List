@@ -7,13 +7,13 @@ let search_listsHeading_htmlElement = document.querySelector("#searchedListsHead
 let searchedLists_htmlElement = document.querySelector(".searchedLists");
 
 // display todos and lists
-searchInputField.addEventListener("keyup", async (e) => {
+searchInputField.addEventListener("keyup", async () => {
     // display searched Todos
     await getTodosWithOccurringLetters().then((resultTodos) => {
         search_todosHeading_htmlElement.style.display = "block"
         searchedTodos_htmlElement.innerHTML = "";
         resultTodos.forEach((currentTodo) => {
-            searchedTodos_htmlElement.innerHTML += `<p onclick='goToTodo(${currentTodo.ID})' style="cursor: pointer">${currentTodo.NAME}</p>`;
+            searchedTodos_htmlElement.innerHTML += `<p onmousedown="getToSearchedTodo(${currentTodo.ID})" style="cursor: pointer">${currentTodo.NAME}</p>`;
         })
     });
 
@@ -22,7 +22,7 @@ searchInputField.addEventListener("keyup", async (e) => {
         search_listsHeading_htmlElement.style.display = "block";
         searchedLists_htmlElement.innerHTML = "";
         resultLists.forEach((currentList) => {
-            searchedLists_htmlElement.innerHTML = `<p>${currentList.NAME}</p>`;
+            searchedLists_htmlElement.innerHTML = `<p onmousedown="getToSearchedList(${currentList.ID})" style="cursor: pointer">${currentList.NAME}</p>`;
         })
     })
 });
@@ -38,6 +38,41 @@ async function getListsWithOccurringLetters() {
     return await resultLists.json();
 }
 
-function goToTodo(id) {
-    console.log("test");
+async function getToSearchedTodo(id) {
+    let resTodos = await fetch(`/api/search/getListIDFromSearchedTodo?id=${id}`);
+    let listID = await resTodos.json();
+
+    let resLists = await fetch(`/api/search/getSearchedListName?id=${listID[0].LISTID}`);
+    let listName = await resLists.json();
+
+    await getTodos(listID[0].LISTID);
+    showTodos(listID[0].LISTID);
+    setListName(listName[0].NAME);
+
+    let todoElement = document.querySelector(`.todoID_${id}`);
+
+    todoElement.style.boxShadow = "0 0 1.5px 1.5px #F3E2A9";
+    setTimeout(() => {
+
+        todoElement.style.boxShadow = "none";
+    }, 1500)
+}
+
+async function getToSearchedList(id) {
+    let res = await fetch (`/api/search/getSearchedListName?id=${id}`);
+    let listName = await res.json();
+
+    await getTodos(id);
+
+    let currentListElement =  document.querySelector(".currentList");
+
+    // yellow border
+    currentListElement.style.boxShadow = "0 0 1.5px 1.5px #F3E2A9";
+    currentListElement.style.transition = "none";
+    setTimeout(() => {
+        currentListElement.style.boxShadow = "none";
+    }, 1500)
+
+    showTodos(id);
+    setListName(listName[0].NAME)
 }
