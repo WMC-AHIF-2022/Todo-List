@@ -20,6 +20,10 @@ async function signup() {
             })
         })
 
+        if (res.status === 500) {
+            alert("Username does already exist");
+        }
+
         if (res.ok) {
             const data = await res.json();
             sessionStorage.setItem("userID", data.insertedId);

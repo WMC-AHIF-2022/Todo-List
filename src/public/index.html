@@ -69,19 +69,24 @@
 
     <!-- ---------- TODOS DETAILS ---------- -->
     <div class="todoDetails">
-        <p id="todoDetailsNameHeading">Name: <span id="todoDetailsName">bla bla</span></p>
+        <p id="todoDetailsNameHeading">Name: <input id="todoDetailsName" disabled onkeydown="onKeyDown_todos(event, this.value, this)"></p>
+
+        <!-- edit name -->
+        <i class="fa fa-pencil editName-Details" style="transform: scale(0.8)" onclick="activateEditListener_todos()"></i>
 
         <div style="margin-left: 40px; margin-bottom: 10px; margin-top: -10px;" id="todoDetailsDateContainer">
             <p id="todoDetailsDateHeading">Date: </p>
             <div style="display: flex; align-items: center;">
-                <input pattern="\d{2}\.\d{2}\.\d{4}" disabled id="todoDetailsDate-inputField" onkeydown="onKeyDown_dateDetails(event, this.value, this)"></input>
+                <input pattern="\d{2}\.\d{2}\.\d{4}" disabled id="todoDetailsDate-inputField" onkeydown="onKeyDown_dateDetails(event, this.value, this)">
 
+                <!-- edit date -->
                 <i class="fa fa-pencil editDate-Details" onclick="editDate_description()"></i>
             </div>
         </div>
 
         <p id="todoDetailsDescriptionHeading">
             Description
+            <!-- edit description -->
             <i class="fa fa-pencil editTodoDescription" onclick="editTodoDescription()"></i>
         </p>
         <textarea id="todoDetailsDescription" disabled onkeydown="onKeyDown_todoDetails(event, this.value, this)"></textarea>

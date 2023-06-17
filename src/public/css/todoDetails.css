@@ -6,7 +6,7 @@
     transition: all 0.3s ease-in-out;
 
     height: 35%;
-    width: max-content;
+    width: 20vw;
     min-width: 100%;
 
     background: rgba(255, 255, 255, 0.3);
@@ -23,7 +23,34 @@
 }
 
 #todoDetailsName {
+    background: none;
+    border: none;
+    width: 130px;
+
+    overflow-x: auto;
+
     font-weight: normal;
+    outline: none;
+
+    font-size: 16px;
+    color: black;
+
+    margin-top: 0;
+}
+
+/* color black */
+#todoDetailsName:disabled {
+    -webkit-text-fill-color: #000000;
+}
+
+.editName-Details {
+    position: absolute;
+    transform: scale(0.8);
+    right: 40px;
+    top: 40px;
+}
+.editName-Details:hover {
+    cursor: pointer;
 }
 
 
@@ -36,8 +63,10 @@
 
 #todoDetailsDateHeading {
     margin: 0;
+    margin-top: -5px;
     font-weight: bold;
 }
+
 #todoDetailsDate-inputField:disabled {
     -webkit-text-fill-color: #000000;
 }
@@ -54,12 +83,13 @@
 
     resize: none;
     background: none;
-    margin-left: 5px;
-    margin-top: 0;
+    margin-top: -5px;
 }
 
 .editDate-Details {
+    position: absolute;
     transform: scale(0.8);
+    right: 40px;
 }
 .editDate-Details:hover {
     cursor: pointer;
@@ -69,14 +99,14 @@
 
 #todoDetailsDescriptionHeading {
     font-weight: bold;
-    margin-top: -5px;
+    margin-top: -3px;
     border-bottom: 1px solid black;
 }
 
 #todoDetailsDescription {
     margin-left: 40px;
-    width: calc(100% - 90px);
-    height: calc(100% - 170px);
+    width: calc(100% - 103px);
+    height: calc(100% - 180px);
 
     margin-top: -5px;
 
@@ -85,9 +115,7 @@
     border: 1.5px solid rgb(255, 255, 255, 0.5);
     resize: none;
 
-    padding-left: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px;
 
     outline: none;
 }
@@ -98,7 +126,9 @@
 }
 
 .editTodoDescription {
+    position: absolute;
     transform: scale(0.8);
+    right: 40px;
 }
 .editTodoDescription:hover {
     cursor: pointer;

@@ -10,7 +10,7 @@ function showTodoDetails(id, name, deadline) {
     currentEditingTodoDeadline = deadline;
     currentTodoID = id;
 
-    document.querySelector("#todoDetailsName").innerHTML = name;
+    document.querySelector("#todoDetailsName").value = name;
     document.querySelector("#todoDetailsDate-inputField").value = deadline;
 
     refreshTodoDetails();
@@ -79,19 +79,19 @@ function editDate_description() {
     todoDetailsDate.focus();
 }
 
-function onKeyDown_dateDetails(e, date, textarea) {
+function onKeyDown_dateDetails(e, date, inputField) {
     if (e.keyCode === 13) {
         if (checkDate(date)) {
             console.log(date);
             updateDate_description(date);
-            textarea.disabled = true;
+            inputField.disabled = true;
         }
 
         e.preventDefault();
         refreshTodos();
     }
     if (e.keyCode === 27) {
-        textarea.disabled = true;
+        inputField.disabled = true;
         refreshTodos();
     }
 }
