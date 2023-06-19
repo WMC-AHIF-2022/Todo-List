@@ -33,6 +33,7 @@ loginSignupRouter.post('/signup', async(req, res) => {
             return;
         }
 
+        // check if username does already exist
         if (rows.length > 0) {
             res.status(500).json("Username does already exist");
         } else {

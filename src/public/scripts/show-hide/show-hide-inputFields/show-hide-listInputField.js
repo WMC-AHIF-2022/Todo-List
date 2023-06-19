@@ -2,6 +2,7 @@ let listInput = document.querySelector(".listInput");
 isClicked = false;
 
 function showHideListInputField() {
+    console.log("test")
     if (isClicked) {
         hideListInput();
     } else {

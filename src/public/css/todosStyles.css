@@ -140,7 +140,7 @@
 
 .input-controller_todos textarea::-webkit-scrollbar-thumb {
     border-radius: 8px;
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 #todosContainer {

@@ -23,19 +23,45 @@
 }
 
 #todoDetailsName {
-    background: none;
+    position: absolute;
+
     border: none;
-    width: 130px;
+    background: none;
+    border-radius: 2px;
+
+    width: calc(100% - 190px);
+    height: 25px;
+    font-size: 15px;
+    cursor: pointer;
+    white-space: nowrap;
 
     overflow-x: auto;
+    overflow-y: scroll;
 
-    font-weight: normal;
+    margin-left: 5px;
+
+    top: 27px;
+
+    resize: none;
+}
+
+#todoDetailsName:focus {
     outline: none;
+}
 
-    font-size: 16px;
-    color: black;
+#todoDetailsName::-webkit-scrollbar {
+    height: 5px;
+    display: none;
+}
 
-    margin-top: 0;
+#todoDetailsName:hover::-webkit-scrollbar {
+    width: 1px;
+    display: block;
+}
+
+#todoDetailsName::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* color black */
@@ -47,7 +73,7 @@
     position: absolute;
     transform: scale(0.8);
     right: 40px;
-    top: 40px;
+    top: 32px;
 }
 .editName-Details:hover {
     cursor: pointer;
@@ -63,7 +89,7 @@
 
 #todoDetailsDateHeading {
     margin: 0;
-    margin-top: -5px;
+    margin-top: 5px;
     font-weight: bold;
 }
 
@@ -78,12 +104,13 @@
 
     width: 83px;
 
-    font-size: 16px;
+    font-size: 15px;
     color: black;
 
     resize: none;
     background: none;
-    margin-top: -5px;
+    margin-top: 4px;
+    margin-left: 5px;
 }
 
 .editDate-Details {
@@ -99,7 +126,7 @@
 
 #todoDetailsDescriptionHeading {
     font-weight: bold;
-    margin-top: -3px;
+    margin-top: -2px;
     border-bottom: 1px solid black;
 }
 

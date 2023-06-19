@@ -26,16 +26,27 @@ listsRouter.get("/getLists", (req, res) => {
 
 
 listsRouter.post("/createList", (req, res) => {
-    db.query(`SELECT ID FROM ACCOUNT`, (err, rows) => { // ermittlung der account id
-        // erstellen der liste mit dem werten "name" und "account id"
-        db.query(`INSERT INTO LISTS (NAME, ACCID) VALUES ('${req.body.value}', '${req.body.accID}')`, (err, rows) => {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            res.send(rows);
-        })
-    });
+    db.query(`SELECT * FROM LISTS WHERE NAME = '${req.body.value}' AND ACCID = '${req.body.accID}'`, (err, rows) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+
+        // if no list with this name exists yet
+        if (rows.length === 0) {
+            db.query(`SELECT ID FROM ACCOUNT`, (err, rows) => {
+                db.query(`INSERT INTO LISTS (NAME, ACCID) VALUES ('${req.body.value}', '${req.body.accID}')`, (err, rows) => {
+                    if (err) {
+                        console.log(err);
+                        return;
+                    }
+                    res.status(200).json(rows);
+                })
+            });
+        } else {
+            res.status(500).json("Name does already exist");
+        }
+    })
 })
 
 listsRouter.put("/editList", (req, res) => {

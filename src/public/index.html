@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/todoDetails.css">
 
     <script src="https://kit.fontawesome.com/5548ac9694.js" crossorigin="anonymous"></script></head>
-    <link rel="shortcut icon" href="#">
+<link rel="shortcut icon" href="#">
 <body>
 <div class="grid-container">
     <!-- ---------- NAVBAR ---------- -->
@@ -22,10 +22,7 @@
 
         <div class="listInput">
             <p>Name:</p>
-            <label for="newList"></label><input
-                type="text"
-                id="newList"
-                placeholder="Enter new list">
+            <label for="newList"></label><input id="newList" onkeydown="onKeyDown_createList(event)" type="text" placeholder="Enter new list">
             <i class="fa fa-duotone fa-check enterListBtn" id="enterList"></i>
 
         </div>
@@ -35,7 +32,7 @@
 
     <!-- ---------- SEARCH BOX ---------- -->
     <div class="searchBox">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="fa-solid fa-magnifying-glass searchLoup"></i>
         <input id ="searchInput" placeholder="Search">
 
     </div>
@@ -57,11 +54,11 @@
         <div class="todoInput">
             <p>Name:</p>
             <label for="newTodo"></label>
-            <input type="text" id="newTodo" placeholder="Enter new todo">
+            <input type="text" id="newTodo" onkeydown="onKeyDown_createTodo(event)" placeholder="Enter new todo">
 
             <p style="position: absolute; top: 30px;">Date:</p>
-            <input id="newTodoDate" style="position: absolute; top: 30px; left: 68px;" type="text" placeholder="DD.MM.YYYY" pattern="\d{2}\.\d{2}\.\d{4}">
-            <i class="fa fa-duotone fa-check enterTodoBtn" id="enterTodo" onclick="createTodoButtonPressed()"></i>
+            <input id="newTodoDate" onkeydown="onKeyDown_createTodo(event)" style="position: absolute; top: 30px; left: 68px;" type="text" placeholder="DD.MM.YYYY" pattern="\d{2}\.\d{2}\.\d{4}">
+            <i class="fa fa-duotone fa-check enterTodoBtn" id="enterTodo" onclick="createTodo_buttonPressed()"></i>
         </div>
         <button class="createNewTodo" onclick="showHideTodoInputField()">+ create new Todo</button>
     </div>
@@ -69,7 +66,7 @@
 
     <!-- ---------- TODOS DETAILS ---------- -->
     <div class="todoDetails">
-        <p id="todoDetailsNameHeading">Name: <input id="todoDetailsName" disabled onkeydown="onKeyDown_todos(event, this.value, this)"></p>
+        <p id="todoDetailsNameHeading">Name: <textarea id="todoDetailsName" disabled onkeydown="onKeyDown_todos(event, this.value, this)"></textarea></p>
 
         <!-- edit name -->
         <i class="fa fa-pencil editName-Details" style="transform: scale(0.8)" onclick="activateEditListener_todos()"></i>
@@ -94,8 +91,9 @@
 
     <!-- ---------- ACC OPTIONS ---------- -->
     <div class="dropdown">
-        <button class="dropdown-btn"></button><i class="fa-solid fa-chevron-down" style="transform: scale(0.8);"></i>
+        <button class="dropdown-btn"></button><i class="fa-solid fa-chevron-down arrowDown" style="transform: scale(0.8);"></i>
         <div class="dropdown-content">
+            <a href="#" id="switchAppearanceButton" onclick="switchAppearance()" style="color: black">To Dark</a>
             <a href="#" onclick="logout()">Logout</a>
         </div>
     </div>
@@ -112,5 +110,6 @@
 <script src="scripts/search.js"></script>
 <script src="scripts/todoDetails.js"></script>
 <script src="scripts/login-signup-logout/logout.js"></script>
+<script src="scripts/switchAppearance.js"></script>
 </body>
 </html>
