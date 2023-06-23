@@ -74,6 +74,13 @@ function displayLists(lists) {
                 </div>`
     }
     document.querySelector(".lists-list").innerHTML = displayedLists;
+
+    // switch appearance because otherwise task elements would not be changed
+    if (sessionStorage.getItem("light") === "true") {
+        switchToLight();
+    } else {
+        switchToDark();
+    }
 }
 
 function refreshLists() {

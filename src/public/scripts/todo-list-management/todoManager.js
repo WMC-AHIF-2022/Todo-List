@@ -142,7 +142,6 @@ function displayTodos() {
     document.querySelector(".todos").innerHTML = displayedTodos;
 
     // switch appearance because otherwise task elements would not be changed
-    console.log(sessionStorage.getItem("light"));
     if (sessionStorage.getItem("light") === "true") {
         switchToLight();
     } else {
