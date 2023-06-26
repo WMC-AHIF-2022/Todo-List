@@ -90,7 +90,7 @@ async function createTodo() {
             "value": name_inputElement.value,
             "index": currentListID,
             "deadline": date_inputElement.value,
-            "userID": sessionStorage.getItem("userID")
+            "token": sessionStorage.getItem("userToken")
         }),
     })
 

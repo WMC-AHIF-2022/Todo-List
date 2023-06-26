@@ -40,13 +40,13 @@ searchInputField.addEventListener("keyup", async () => {
 // get tasks
 // letters are saved in "searchInputField.value"
 async function getTodosWithOccurringLetters() {
-    let resultTodos = await fetch(`/api/search/getTodosWithOccurringLetters?letter=${searchInputField.value}&userID=${sessionStorage.getItem(("userID"))}`);
+    let resultTodos = await fetch(`/api/search/getTodosWithOccurringLetters?letter=${searchInputField.value}&token=${sessionStorage.getItem(("userToken"))}`);
     return await resultTodos.json();
 }
 
 // get lists
 async function getListsWithOccurringLetters() {
-    let resultLists = await fetch(`/api/search/getListsWithOccurringLetters?letter=${searchInputField.value}&userID=${sessionStorage.getItem(("userID"))}`);
+    let resultLists = await fetch(`/api/search/getListsWithOccurringLetters?letter=${searchInputField.value}&token=${sessionStorage.getItem(("userToken"))}`);
     return await resultLists.json();
 }
 

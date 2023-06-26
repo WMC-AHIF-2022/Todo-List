@@ -26,7 +26,7 @@ async function signup() {
 
         if (res.ok) {
             const data = await res.json();
-            sessionStorage.setItem("userID", data.insertedId);
+            sessionStorage.setItem("userToken", data.token);
             sessionStorage.setItem("username", usernameField.value);
 
             window.location.href = "../../index.html";
@@ -40,7 +40,7 @@ async function login() {
 
         if (res.ok) {
             const data = await res.json();
-            sessionStorage.setItem("userID", data.currentID);
+            sessionStorage.setItem("userToken", data.token);
             sessionStorage.setItem("username", data.currentUsername);
 
             window.location.href = "../../index.html";

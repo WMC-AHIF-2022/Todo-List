@@ -1,5 +1,6 @@
 const express = require('express');
 const mySQL = require('mysql');
+const jwt = require("jsonwebtoken");
 const db = mySQL.createConnection({
     host: "45.81.235.37",
     user: "elplak",
@@ -12,10 +13,14 @@ const db = mySQL.createConnection({
 const searchRouter = express.Router();
 module.exports = { "searchRouter": searchRouter };
 
+const secretKey = "Qbt9rE+7qUq9GstXZPc7d7gLdJIbNdxaI1ONsvmg5Ls=";
+
 searchRouter.use(express.json());
 
 searchRouter.get("/getTodosWithOccurringLetters", (req, res) => {
-    db.query(`SELECT * FROM TODOS WHERE LOWER(NAME) LIKE '%${req.query.letter}%' AND ACCID = ${req.query.userID};`, (err, rows) => {
+    const decoded = jwt.verify(req.query.token, secretKey);
+
+    db.query(`SELECT * FROM TODOS WHERE LOWER(NAME) LIKE '%${req.query.letter}%' AND ACCID = ${decoded.id};`, (err, rows) => {
         if (err) {
             console.log(err);
             return;
@@ -25,7 +30,9 @@ searchRouter.get("/getTodosWithOccurringLetters", (req, res) => {
 })
 
 searchRouter.get("/getListsWithOccurringLetters", (req, res) => {
-    db.query(`SELECT * FROM LISTS WHERE LOWER(NAME) LIKE '%${req.query.letter}%' AND ACCID = ${req.query.userID};`, (err, rows) => {
+    const decoded = jwt.verify(req.query.token, secretKey);
+
+    db.query(`SELECT * FROM LISTS WHERE LOWER(NAME) LIKE '%${req.query.letter}%' AND ACCID = ${decoded.id};`, (err, rows) => {
         if (err) {
             console.log(err);
             return;

@@ -1,5 +1,6 @@
 const express = require('express');
 const mySQL = require('mysql');
+const jwt = require("jsonwebtoken");
 const db = mySQL.createConnection({
     host: "45.81.235.37",
     user: "elplak",
@@ -11,6 +12,8 @@ const db = mySQL.createConnection({
 
 const todosRouter = express.Router();
 module.exports = { "todosRouter": todosRouter };
+
+const secretKey = "Qbt9rE+7qUq9GstXZPc7d7gLdJIbNdxaI1ONsvmg5Ls=";
 
 todosRouter.use(express.json());
 
@@ -35,7 +38,9 @@ todosRouter.get("/getTodoByID", (req, res) => {
 })
 
 todosRouter.post("/createTodo", (req, res) => {
-    db.query(`INSERT INTO TODOS (name, done, listId, deadline, accID) VALUES ('${req.body.value}', false, ${req.body.index}, STR_TO_DATE('${req.body.deadline}', '%d.%m.%Y'), ${req.body.userID})`, (err, rows) => {
+    const decoded = jwt.verify(req.body.token, secretKey);
+
+    db.query(`INSERT INTO TODOS (name, done, listId, deadline, accID) VALUES ('${req.body.value}', false, ${req.body.index}, STR_TO_DATE('${req.body.deadline}', '%d.%m.%Y'), ${decoded.id})`, (err, rows) => {
         if (err) {
             console.log(err);
             return;

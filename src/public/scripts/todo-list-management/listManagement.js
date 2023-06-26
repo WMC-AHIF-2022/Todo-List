@@ -30,7 +30,7 @@ async function createList(data) {
         },
         body: JSON.stringify({
             "value": data.value,
-            "accID": sessionStorage.getItem("userID")
+            "token": sessionStorage.getItem("userToken")
         }),
     })
 
@@ -49,7 +49,7 @@ async function createList(data) {
 
 // get all lists
 async function getLists() {
-    let res = await fetch (`/api/lists/getLists?accID=${sessionStorage.getItem("userID")}`);
+    let res = await fetch (`/api/lists/getLists?token=${sessionStorage.getItem("userToken")}`);
     return await res.json();
 }
 

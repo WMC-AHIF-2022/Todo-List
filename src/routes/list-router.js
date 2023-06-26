@@ -1,5 +1,6 @@
 const express = require('express');
 const mySQL = require('mysql');
+const jwt = require('jsonwebtoken');
 const db = mySQL.createConnection({
     host: "45.81.235.37",
     user: "elplak",
@@ -12,10 +13,14 @@ const db = mySQL.createConnection({
 const listsRouter = express.Router();
 module.exports = { "listsRouter": listsRouter };
 
+const secretKey = "Qbt9rE+7qUq9GstXZPc7d7gLdJIbNdxaI1ONsvmg5Ls=";
+
 listsRouter.use(express.json());
 
 listsRouter.get("/getLists", (req, res) => {
-    db.query(`SELECT * FROM LISTS WHERE ACCID = '${req.query.accID}'`, (err, rows) => {
+    const decoded = jwt.verify(req.query.token, secretKey);
+
+    db.query(`SELECT * FROM LISTS WHERE ACCID = '${decoded.id}'`, (err, rows) => {
         if (err) {
             console.log(err);
             return;
@@ -24,9 +29,10 @@ listsRouter.get("/getLists", (req, res) => {
     })
 })
 
-
 listsRouter.post("/createList", (req, res) => {
-    db.query(`SELECT * FROM LISTS WHERE NAME = '${req.body.value}' AND ACCID = '${req.body.accID}'`, (err, rows) => {
+    const decoded = jwt.verify(req.body.token, secretKey);
+
+    db.query(`SELECT * FROM LISTS WHERE NAME = '${req.body.value}' AND ACCID = '${decoded.id}'`, (err, rows) => {
         if (err) {
             console.log(err);
             return;
@@ -35,7 +41,7 @@ listsRouter.post("/createList", (req, res) => {
         // if no list with this name exists yet
         if (rows.length === 0) {
             db.query(`SELECT ID FROM ACCOUNT`, (err, rows) => {
-                db.query(`INSERT INTO LISTS (NAME, ACCID) VALUES ('${req.body.value}', '${req.body.accID}')`, (err, rows) => {
+                db.query(`INSERT INTO LISTS (NAME, ACCID) VALUES ('${req.body.value}', '${decoded.id}')`, (err, rows) => {
                     if (err) {
                         console.log(err);
                         return;
